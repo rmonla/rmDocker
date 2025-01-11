@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Homepage en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Versión: 250109-1429 - rmDocker|Homepage|rmDkrUp-Homepage.sh
+# rmDocker|Homepage - v250110-2333
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -49,8 +49,8 @@ crear_directorio() {
 dirDKR="$(pwd)/$dkrNOM"
 
 directorios=(
-    # "$dirDKR"
     "$dirDKR/$appDirCFG"
+    # "$dirDKR"
 )
 
 crear_directorio "${directorios[@]}"
@@ -62,7 +62,6 @@ escribir_archivo() {
 }
 escribir_archivo "${dkrVRS}" "$dirDKR/$dkrArchENV" # Variables de entorno de Docker
 escribir_archivo "${dkrYML}" "$dirDKR/$dkrArchYML" # Archivo de despliegue de Docker
-# escribir_archivo "# Versión: 250105-22323 - rmDocker|Homepage|rmDkrUp-Homepage.sh" "$dirDKR/$appArchCFG" # Archivo de despliegue de Docker
 # ---
 
 # Ejecutar docker-compose

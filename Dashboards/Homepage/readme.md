@@ -1,6 +1,6 @@
 <!--  
 # Ricardo MONLA (https://github.com/rmonla)
-# Versión: 250110-0055 - rmDocker|Homepage
+# Homepage - v250110-2333
 -->
 # <img src="https://github.com/gethomepage/homepage/raw/dev/images/banner_light@2x.png" alt="Homepage Logo"/> Homepage
 
@@ -47,31 +47,12 @@ Este documento explica cómo configurar un contenedor Docker para implementar **
 Ejecuta el siguiente comando en tu terminal para descargar y ejecutar el script:
 
 ```bash
-curl -sSL "https://github.com/rmonla/rmLIBs/raw/refs/heads/master/_rmDocker/Dashboards/Homepage/rmDkrUp-Homepage.sh" | bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Dashboards/Homepage/rmDkrUp-Homepage.sh" | bash
 ```
 
 ---
 
-## Notas Adicionales
 
-- **Detener el Contenedor:**
-  Para detener y eliminar el contenedor en ejecución, utiliza el comando:
-
-  ```bash
-  docker compose down
-  ```
-
-- **Actualizar Homepage:**
-  Si deseas actualizar a la última versión del contenedor, ejecuta:
-
-  ```bash
-  docker compose pull && docker compose up -d
-  ```
-
-- **Personalización:**
-  Consulta la [documentación oficial](https://gethomepage.dev/latest) para explorar configuraciones avanzadas, definir temas personalizados, y adaptar la herramienta a tus necesidades específicas.
-
----
 
 ## ¡Invítame un Café! ☕
 
