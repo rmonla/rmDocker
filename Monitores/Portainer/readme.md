@@ -1,3 +1,7 @@
+<!--  
+# Ricardo MONLA (https://github.com/rmonla)
+# Portainer|readme.md - v250110-2220
+-->
 # <img src="https://www.portainer.io/hubfs/portainer-logo-white-1.svg" alt="Portainer Logo" width="50%"/>
 
 Este documento describe cómo configurar e implementar **Portainer** utilizando contenedores Docker. Portainer es una solución moderna y potente para la gestión de entornos Docker y Kubernetes, diseñada para simplificar la administración de contenedores, aplicaciones y redes, tanto en configuraciones domésticas como empresariales. Con una interfaz gráfica intuitiva y personalizable, Portainer centraliza las operaciones, aumentando la eficiencia y reduciendo la complejidad técnica.
@@ -6,11 +10,11 @@ Este documento describe cómo configurar e implementar **Portainer** utilizando 
 
 ## Enlaces de Consulta
 
-- 📚 Información del Aplicativo:
-  - [Sitio Oficial de Portainer](https://www.portainer.io/)
+- 📚 **Información del Aplicativo**:
+  - [Sitio Oficial](https://www.portainer.io)
   - [Repositorio en GitHub](https://github.com/portainer/portainer)
-  - [Documentación Oficial](https://docs.portainer.io/)
-- 🎥 Videos Recomendados:
+  - [Documentación Oficial](https://docs.portainer.io)
+- 🎥 **Videos Recomendados**:
   - [NUEVA interfaz WEB para tus contenedores! - PORTAINER! / V2M](https://youtu.be/TSot5AnS-mk) - por [**Pelado Nerd**](https://www.youtube.com/@PeladoNerd)
 
 ---
@@ -29,128 +33,32 @@ Este documento describe cómo configurar e implementar **Portainer** utilizando 
 
 ## Requisitos Previos
 
-1. **Sistema Base:** 
-   - Docker y Docker Compose deben estar instalados y configurados.
-2. **Espacio de Almacenamiento:**
-   - Suficiente para los datos persistentes de Portainer.
-3. **Acceso a Puertos:**
-   - Configuración del puerto 9000 para la interfaz web de Portainer.
-4. **Privilegios Administrativos:**
-   - Acceso root o permisos equivalentes para ejecutar Docker.
+- **Sistema operativo:** Linux Debian (se requiere que `curl` esté instalado).
+- Docker y Docker Compose instalados en el sistema.
+- Espacio en disco adecuado para datos persistentes.
+- Acceso a los puertos necesarios para la interfaz web y servicios relacionados.
 
 ---
 
 ## Configuración e Implementación
 
-### 1. Crear y Editar el Script de Despliegue
+### 1. Ejecutar el Script de Despliegue `rmDkrUp-Portainer.sh`
 
-Crea un archivo de script llamado `rmDkr-Deploy-Portainer.sh` ejecutando:
-
-```bash
-nano rmDkr-Deploy-Portainer.sh
-```
-
-Copia y pega el siguiente contenido en el archivo:
+Ejecuta el siguiente comando en tu terminal para descargar y ejecutar el script:
 
 ```bash
-#!/bin/bash
-# Script para configurar e implementar Portainer en Docker
-# Ricardo MONLA (https://github.com/rmonla)
-# rmDocker|Portainer - Versión: 241230-0151
-
-# Definición de Variables
-dkrVRS=$(cat <<YAML
-dkrNOM=portainer
-dkrPOR=9000
-dkrArchENV=.env
-dkrArchYML=docker-compose.yml
-appDirDAT=portainer-data
-YAML
-)
-
-# Configuración del archivo docker-compose.yml
-dkrYML=$(cat <<YAML
-services:
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: \${dkrNOM}
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./\${appDirDAT}:/data
-    ports:
-      - \${dkrPOR}:9000
-YAML
-)
-
-# Procesar y exportar variables
-eval "$(echo "$dkrVRS" | grep -E '^[a-zA-Z_][a-zA-Z0-9_]*=' | sed 's/^/export /')"
-
-# Crear directorios requeridos
-crear_directorio() {
-    echo "Creando el directorio $1"
-    mkdir -p "$1" || { echo "Error al crear el directorio $1"; exit 1; }
-}
-dirDKR="$(pwd)/$dkrNOM"
-crear_directorio "$dirDKR"
-crear_directorio "$dirDKR/$appDirDAT"
-
-# Crear archivos de configuración
-escribir_archivo() {
-    echo "Creando el archivo $2"
-    echo "$1" > "$2" || { echo "Error al escribir $2"; exit 1; }
-}
-escribir_archivo "${dkrVRS}" "$dirDKR/$dkrArchENV"
-escribir_archivo "${dkrYML}" "$dirDKR/$dkrArchYML"
-
-# Desplegar el contenedor
-archDkrComp="$dirDKR/$dkrArchYML"
-echo "Iniciando el contenedor con docker-compose..."
-docker compose -f "$archDkrComp" up -d || { echo "Error al ejecutar docker-compose"; exit 1; }
-
-# Mensaje de finalización
-echo "${dkrNOM} se ha desplegado correctamente en http://0.0.0.0:${dkrPOR}/"
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Portainer/rmDkrUp-Portainer.sh" | bash
 ```
 
 ---
 
-### 2. Ejecutar el Script de Despliegue
 
-Guarda el archivo y asegúrate de que tenga permisos de ejecución:
+## ¡Invítame un Café! ☕
 
-```bash
-chmod +x rmDkr-Deploy-Portainer.sh
-sh rmDkr-Deploy-Portainer.sh
-```
+Si este proyecto te ha sido útil y deseas apoyar su desarrollo, considera invitarme un café. Cada contribución ayuda a mantener el flujo de trabajo y a mejorar herramientas como esta.  
+
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
 ---
 
-## Notas Adicionales
-
-- **Detener el Contenedor:**
-  Para detener y eliminar el contenedor ejecuta:
-
-  ```bash
-  docker compose down
-  ```
-
-- **Actualizar Portainer:**
-  Para actualizar a la última versión, utiliza:
-
-  ```bash
-  docker compose pull && docker compose up -d
-  ```
-
-- **Personalización Avanzada:**
-  Revisa la [documentación oficial](https://docs.portainer.io/) para opciones avanzadas de configuración y seguridad.
-
----
-
-## Créditos
-
-**Ricardo MONLA**  
-[GitHub](https://github.com/rmonla) | **rmDocker|Portainer - Versión: 241230-0151**
-```
+> Este documento está basado en los estándares y prácticas recomendadas para implementaciones autohospedadas con Docker. Asegúrate de realizar un monitoreo regular y mantener el sistema actualizado.
