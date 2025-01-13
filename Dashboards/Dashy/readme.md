@@ -1,6 +1,6 @@
 <!--  
 # Ricardo MONLA (https://github.com/rmonla)
-# Dashy - v250113-0710
+# Dashy - v250113-0745
 -->
 # <img src="https://dashy.to/img/dashy.png" alt="Dashy Logo" width="100"/> Dashy
 
@@ -45,7 +45,7 @@ Este documento explica cómo configurar un contenedor Docker para implementar **
 Ejecuta el siguiente comando en tu terminal para descargar y ejecutar el script:
 
 ```bash
-curl -sSL "https://github.com/rmonla/rmLIBs/raw/refs/heads/master/_rmDocker/Dashboards/Dashy/rmDkrUp-Dashy.sh" | bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Dashboards/Dashy/rmDkrUp-Dashy.sh" | bash
 ```
 
 ---
