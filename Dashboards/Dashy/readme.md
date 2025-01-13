@@ -45,7 +45,7 @@ Este documento explica cómo configurar un contenedor Docker para implementar **
 Ejecuta el siguiente comando en tu terminal para descargar y ejecutar el script:
 
 ```bash
-curl -sSL "https://github.com/rmonla/rmLIBs/raw/refs/heads/master/_rmDocker/Monitores/Dashy/rmDkrUp-Dashy.sh" | bash
+curl -sSL "https://github.com/rmonla/rmLIBs/raw/refs/heads/master/_rmDocker/Dashboards/Dashy/rmDkrUp-Dashy.sh" | bash
 ```
 
 ---
