@@ -1,13 +1,13 @@
 #!/bin/bash
 # Script para configurar y desplegar DashDOT en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# DashDOT - v250112-2112
+# DashDOT - v250112-2153
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
 
 dkrNOM=dashdot
-dkrPOR=3001
+dkrPOR=3002
 
 dkrArchENV=.env
 dkrArchYML=docker-compose.yml
