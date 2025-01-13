@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar DashDOT en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# DashDOT - v250112-2153
+# DashDOT - v250112-2158
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -19,9 +19,9 @@ YAML
 dkrYML=$(cat <<YAML
 services:
     dashdot:
-        container_name: ${dkr_NOM}
+        container_name: \${dkr_NOM}
         ports:
-            - ${dkr_POR}:3001
+            - \${dkr_POR}:3001
         environment:
             - DASHDOT_ENABLE_CPU_TEMPS=true
             - DASHDOT_OVERRIDE_OS=DSM
