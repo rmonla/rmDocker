@@ -1,6 +1,6 @@
 <!--  
 # Ricardo MONLA (https://github.com/rmonla)
-# Versión: 250106-0128 - rmDocker|Dashy
+# Dashy - v250113-0710
 -->
 # <img src="https://dashy.to/img/dashy.png" alt="Dashy Logo" width="100"/> Dashy
 
@@ -31,6 +31,7 @@ Este documento explica cómo configurar un contenedor Docker para implementar **
 
 ## Requisitos Previos
 
+- Sistema operativo Linux y se requiere que `curl` esté instalado.
 - Docker y Docker Compose instalados en el sistema.
 - Espacio en disco adecuado para datos persistentes.
 - Acceso a los puertos necesarios para la interfaz web y servicios relacionados.
@@ -49,24 +50,11 @@ curl -sSL "https://github.com/rmonla/rmLIBs/raw/refs/heads/master/_rmDocker/Moni
 
 ---
 
-## Notas Adicionales
+## ¡Invítame un Café! ☕
 
-- **Detener el Contenedor:**
-  Para detener y eliminar el contenedor en ejecución, utiliza el comando:
+Si este proyecto te ha sido útil y deseas apoyar su desarrollo, considera invitarme un café. Cada contribución ayuda a mantener el flujo de trabajo y a mejorar herramientas como esta.  
 
-  ```bash
-  docker compose down
-  ```
-
-- **Actualizar Dashy:**
-  Si deseas actualizar a la última versión del contenedor, ejecuta:
-
-  ```bash
-  docker compose pull && docker compose up -d
-  ```
-
-- **Personalización:**
-  Consulta la [documentación oficial](https://dashy.to/docs/) para explorar configuraciones avanzadas, definir temas personalizados, y adaptar la herramienta a tus necesidades específicas.
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
 ---
 

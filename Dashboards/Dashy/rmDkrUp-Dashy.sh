@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Dashy en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Versión: 250106-0006 - rmDocker|Dashy|rmDkrUp-Dashy.sh
+# Dashy - v250113-0723
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -22,10 +22,10 @@ services:
         image: lissy93/dashy:latest
         container_name: \${dkrNOM}
         restart: always
-        volumes:
-            - ./\${appArchCFG}:/app/user-data/conf.yml
         ports:
             - \${dkrPOR}:8080
+        volumes:
+            - ./\${appArchCFG}:/app/user-data/conf.yml
 
 YAML
 )
@@ -58,7 +58,7 @@ escribir_archivo() {
 }
 escribir_archivo "${dkrVRS}" "$dirDKR/$dkrArchENV" # Variables de entorno de Docker
 escribir_archivo "${dkrYML}" "$dirDKR/$dkrArchYML" # Archivo de despliegue de Docker
-escribir_archivo "# Versión: 250105-22323 - rmDocker|Dashy|rmDkrUp-Dashy.sh" "$dirDKR/$appArchCFG" # Archivo de despliegue de Docker
+escribir_archivo "# rmDocker|Dashy - v250113-0723" "$dirDKR/$appArchCFG" # Archivo de configuración de la App
 # ---
 
 # Ejecutar docker-compose

@@ -1,5 +1,5 @@
 # <img src="./logo-Homer.png" alt="Homer Logo" width="100"/> Homer
-
+ttt
 **Homer** es un dashboard para todas sus aplicaciones web. Sin embargo, no tiene que limitarse a las aplicaciones, puede añadir enlaces a lo que quiera. No hay iframes aquí, no hay aplicaciones dentro de aplicaciones, ni abstracción de APIs. Si crees que algo debería funcionar de cierta manera, 
 
 - 📚 Más información:
