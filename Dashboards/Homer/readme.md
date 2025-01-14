@@ -1,17 +1,25 @@
-# <img src="./logo-Homer.png" alt="Homer Logo" width="100"/> Homer
-ttt
-**Homer** es un dashboard para todas sus aplicaciones web. Sin embargo, no tiene que limitarse a las aplicaciones, puede añadir enlaces a lo que quiera. No hay iframes aquí, no hay aplicaciones dentro de aplicaciones, ni abstracción de APIs. Si crees que algo debería funcionar de cierta manera, 
+<!--  
+# Ricardo MONLA (https://github.com/rmonla)
+# Homer - v250114-1933
+-->
+# <img src="https://raw.githubusercontent.com/bastienwirtz/homer/main/public/logo.png" alt="Homer Logo" width="100"/> Homer
 
-- 📚 Más información:
-  -  [Homer Documentation](https://github.com/bastienwirtz/homer)
-- 📚 Más información:
-  -  [Demo dashboard | Homer](https://homer-demo.netlify.app/)  
-- 🎥 Videos recomendados:
-  - [(3) Descubre 20 aplicaciones que puedes instalar con DOCKER... ¡te encantarán! - YouTube](https://www.youtube.com/watch?v=gqpJ7RE02Ao) - por [**Un loco y su tecnología**](https://www.youtube.com/@unlocoysutecnologia)
+Este documento explica cómo configurar un contenedor Docker para implementar **Homer**, dashboard para todas sus aplicaciones web. Sin embargo, no tiene que limitarse a las aplicaciones, puede añadir enlaces a lo que quiera. No hay iframes aquí, no hay aplicaciones dentro de aplicaciones, ni abstracción de APIs. Si crees que algo debería funcionar de cierta manera.
 
 ---
 
-### Características destacadas
+## Enlaces de Consulta
+
+- 📚 **Información del Aplicativo**:
+  - [Sitio Oficial](https://github.com/bastienwirtz/homer)
+  - [Documentación Oficial](https://github.com/bastienwirtz/homer)
+  - [Demo dashboard | Homer](https://homer-demo.netlify.app/)
+- 🎥 **Videos Recomendados**:
+  - [Descubre 20 aplicaciones que puedes instalar con DOCKER... ¡te encantarán!](https://youtu.be/gqpJ7RE02Ao) - por [**Un loco y su tecnología**](https://www.youtube.com/@unlocoysutecnologia)
+---
+
+## Características Destacadas
+
 - **Interfaz moderna:** Diseño atractivo y minimalista con gráficos en tiempo real.
 - **Altamente personalizable:** Configura widgets para mostrar la información que más necesitas.
 - **Compatibilidad:** Funciona en múltiples plataformas y entornos gracias a Docker.
@@ -20,66 +28,32 @@ ttt
 
 ---
 
-## Script `rmDkrInstall_Homer.sh`
-Este script automatiza la configuración y el despliegue de Homer utilizando contenedores Docker.
+## Requisitos Previos
+
+- Sistema operativo Linux y se requiere que `curl` esté instalado.
+- Docker y Docker Compose instalados en el sistema.
+- Espacio en disco adecuado para datos persistentes.
+- Acceso a los puertos necesarios para la interfaz web y servicios relacionados.
+
+---
+
+## Configuración e Implementación
+
+### 1. Ejecutar el Script de Despliegue `rmDkrUp-Homer.sh`
+
+Ejecuta el siguiente comando en tu terminal para descargar y ejecutar el script:
 
 ```bash
-#!/bin/bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Dashboards/Homer/rmDkrUp-Homer.sh" | bash
+```
+---
 
-# Script para configurar y desplegar Homer en Docker
-# Versión: 241212-0835
+## ¡Invítame un Café! ☕
 
-# Variables de configuración
-dkr_NOM="homer"                        # Nombre del contenedor
-dkr_POR=7081                           # Puerto del contenedor
-dkr_TMZ="America/Argentina/La_Rioja"   # Zona horaria
-dir_CFG="config"                       # Directorio de configuración interna del contenedor
+Si este proyecto te ha sido útil y deseas apoyar su desarrollo, considera invitarme un café. Cada contribución ayuda a mantener el flujo de trabajo y a mejorar herramientas como esta.  
 
-# Configuración del archivo docker-compose
-dkr_CFG=$(cat <<-EOF
-version: '3.8'
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
-services:
-  ${dkr_NOM}:
-    image: b4bz/homer
-    container_name: ${dkr_NOM}
-    volumes:
-      - ./${dir_CFG}:/www/assets # Asegúrate de que tu directorio de configuración local exista
-    ports:
-      - ${dkr_POR}:8080
-    user: 1000:1000 # Por defecto
-    environment:
-      - INIT_ASSETS=1 # Requiere que el directorio de configuración sea escribible para el usuario del contenedor
-      - TZ=${dkr_TMZ} # Configuración de zona horaria
-    restart: unless-stopped
-EOF
-)
+---
 
-# Crear directorio y archivo docker-compose con la configuración
-dkr_DIR="/docker/$dkr_NOM"
-sudo mkdir -p "$dkr_DIR"
-
-dkr_YML="$dkr_DIR/docker-compose.yml"
-echo "$dkr_CFG" | sudo tee "$dkr_YML" > /dev/null
-
-# Configuración necesaria para Homer
-dir_CFG="$dkr_DIR/$dir_CFG"
-if [ ! -d "$dir_CFG" ]; then
-    sudo mkdir -p "$dir_CFG"
-    sudo chmod -R 777 "$dir_CFG"
-fi
-
-# Ejecutar docker-compose
-sudo docker-compose -f "$dkr_YML" up -d || {
-    echo "Error al iniciar los servicios con docker-compose. Verifica los logs para más detalles."
-    exit 1
-}
-
-# Mensaje de finalización
-echo "Se ha desplegado correctamente en http://localhost:${dkr_POR}"
-
-
-
-# tee rmDkrInstall_Homer.sh <<'SHELL'
-# SHELL
-# chmod +x rmDkrInstall_Homer.sh && ./rmDkrInstall_Homer.sh
+> Este documento está basado en los estándares y prácticas recomendadas para implementaciones autohospedadas con Docker. Asegúrate de realizar un monitoreo regular y mantener el sistema actualizado.
