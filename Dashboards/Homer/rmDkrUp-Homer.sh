@@ -1,16 +1,13 @@
 #!/bin/bash
 # Script para configurar y desplegar Homer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Homer - v250114-1933
+# Homer - v250114-2007
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
 
 dkrNOM=homer
 dkrPOR=8080
-
-dkrPUID=1000
-dkrTMZ="America/Argentina/La_Rioja"
 
 dkrArchENV=.env
 dkrArchYML=docker-compose.yml
@@ -24,15 +21,13 @@ services:
   homer:
     image: b4bz/homer
     container_name: \${dkrNOM}
-    user:
-      - \${dkrPUID}:1000 # Por defecto
-    environment:
-      - INIT_ASSETS=1 # Requiere que el directorio de configuración sea escribible para el usuario del contenedor
-      - TZ=\${dkrTMZ} # Configuración de zona horaria
+    volumes:
+      - \${appDirCFG}:/www/assets # Make sure your local config directory exists
     ports:
       - \${dkrPOR}:8080
-    volumes:
-      - ./\${appDirCFG}:/www/assets # Asegúrate de que tu directorio de configuración local exista
+    user: 1000:1000 # default
+    environment:
+      - INIT_ASSETS=1 # default, requires the config directory to be writable for the container user (see user option)
     restart: unless-stopped
 YAML
 )
