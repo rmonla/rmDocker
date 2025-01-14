@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Homer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Homer - v250114-2007
+# Homer - v250114-2013
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -22,7 +22,7 @@ services:
     image: b4bz/homer
     container_name: \${dkrNOM}
     volumes:
-      - \${appDirCFG}:/www/assets # Make sure your local config directory exists
+      - ./\${appDirCFG}:/www/assets # Make sure your local config directory exists
     ports:
       - \${dkrPOR}:8080
     user: 1000:1000 # default
