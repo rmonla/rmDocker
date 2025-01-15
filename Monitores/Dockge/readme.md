@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Dockge - v250115-1949
+# Dockge - v250115-1956
 -->
 
 # <img src="https://github.com/louislam/uptime-kuma/raw/master/public/icon.png" alt="Dockge Logo" width="100"/>Dockge
@@ -54,6 +54,7 @@ Ejecuta el siguiente comando en la terminal para desplegar **Dockge** con Docker
 
 ```bash
 curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Dockge/rmDkrUp-Dockge.sh" | bash
+
 ```
 
 ### Ingreso al Aplicativo
