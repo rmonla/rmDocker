@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Paperless-ngx en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Zotero - v250115-1521
+# Zotero - v250115-1530
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
