@@ -1,69 +1,63 @@
-# Paperless-ngx
-![](./paperless-ngx-banner.png)
+<!--  
+# Ricardo MONLA (https://github.com/rmonla)
+# Paperless-ngx - v250114-2244
+-->
+# <img src="https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/resources/logo/web/png/White%20logo%20-%20no%20background.png" alt="Paperless-ngx Logo" width="300"/>
 
-**Paperless-ngx** es un sistema de gestión de documentos de código abierto diseñado para digitalizar, organizar y buscar documentos de forma eficiente. Permite a los usuarios escanear, almacenar y gestionar documentos electrónicos, proporcionando características como la indexación automática, el reconocimiento óptico de caracteres (OCR) y un sistema de búsqueda avanzado. Es ideal para individuos y organizaciones que buscan una solución accesible y personalizable para gestionar sus archivos digitales de manera ordenada y segura.
+Este documento explica cómo configurar un contenedor Docker para implementar **Paperless-ngx**, un sistema de gestión de documentos de código abierto diseñado para digitalizar, organizar y buscar documentos de forma eficiente. Permite a los usuarios escanear, almacenar y gestionar documentos electrónicos, proporcionando características como la indexación automática, el reconocimiento óptico de caracteres (OCR) y un sistema de búsqueda avanzado. Es ideal para individuos y organizaciones que buscan una solución accesible y personalizable para gestionar sus archivos digitales de manera ordenada y segura.
 
-## rm_dkr_install:
-Este script automatiza la configuración y el despliegue del sistema en contenedores Docker.
-
-```shell
-# rm_dkr_install_v-3.1
-
-# [Paperless-ngx - Docker Hub](https://hub.docker.com/r/linuxserver/paperless-ngx)
-# [Iniciar --> http://localhost:8010 admin:admin
-
-# Variables de configuración
-DKR_NOM="paperless-ngx" # ${DKR_NOM} Nombre del contenedor
-DKR_POR="8010"          # ${DKR_POR} Puerto del contenedor
-DKR_DIR="/docker/$DKR_NOM"
-DKR_YML="$DKR_DIR/docker-compose.yml"
-
-# Cadena con la configuración del archivo docker-compose
-DKR_CFG=$(cat <<-EOF
 ---
-version: "2.1"
-services:
-  ${DKR_NOM}:
-    image: lscr.io/linuxserver/paperless-ngx:latest
-    container_name: ${DKR_NOM}
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Argentina/La_Rioja
-      - REDIS_URL= # optional
-    volumes:
-      - /path/to/appdata/config:/config
-      - /path/to/appdata/data:/data
-    ports:
-      - ${DKR_POR}:8000
-    restart: unless-stopped
-EOF
-)
 
-# Crear directorio y archivo docker-compose con la configuración
-sudo mkdir -p "$DKR_DIR" && echo "$DKR_CFG" | sudo tee "$DKR_YML" > /dev/null
+## Enlaces de Consulta
 
-# Ejecutar docker-compose
-sudo docker-compose -f "$DKR_YML" up -d
+- 📚 **Información del Aplicativo**:
+  - [Sitio Oficial](https://github.com/paperless-ngx/paperless-ngx)
+  - [Documentación Oficial](https://docs.paperless-ngx.com)
+  - [Documentación Docker](https://github.com/linuxserver/docker-paperless-ngx)
+- 🎥 **Videos Recomendados**:
+  - [Video Paperless-ngx](https://youtu.be/***gqpJ7RE02Ao***) - por [**Paperless-ngx**](https://www.youtube.com/@***unlocoysutecnologia***)
+---
+
+## Características Destacadas
+
+- **Digitalización eficiente:** Permite escanear documentos físicos y convertirlos en archivos digitales con OCR.
+- **Indexación automática:** Organiza y clasifica documentos para una búsqueda rápida y precisa.
+- **Interfaz moderna:** Diseño atractivo y minimalista con gráficos en tiempo real.
+- **Altamente personalizable:** Configura widgets para mostrar la información que más necesitas.
+- **Compatibilidad:** Funciona en múltiples plataformas y entornos gracias a Docker.
+- **Seguridad:** Gestor de usuarios y roles para garantizar acceso seguro a los documentos.
+- **Integraciones:** Compatible con servicios de almacenamiento en la nube y aplicaciones externas.
+- **Configuración sencilla:** Despliegue rápido mediante contenedores Docker.
+- **Actualizaciones regulares:** Comunidad activa que mejora continuamente el software.
+- **Múltiples formatos soportados:** Permite trabajar con documentos en formatos PDF, JPEG, PNG, TIFF y más.
+
+---
+
+## Requisitos Previos
+
+- Sistema operativo Linux y se requiere que [`curl`](https://curl.se/) esté instalado.
+- [Docker](https://www.docker.com/) y [Docker Compose](https://docs.linuxserver.io/general/docker-compose) instalados en el sistema.
+- Espacio en disco adecuado para datos persistentes.
+- Acceso a los puertos necesarios para la interfaz web y servicios relacionados.
+---
+
+## Configuración e Implementación
+
+### 1. Ejecutar el Script de Despliegue `rmDkrUp-Paperless-ngx.sh`
+
+Ejecuta el siguiente comando en tu terminal para descargar y ejecutar el script:
+
+```bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/DMSs/Paperless-ngx/rmDkrUp-Paperless-ngx.sh" | bash
 ```
+---
 
-# rm_dkr_clean
+## ¡Invítame un Café! ☕
 
-Este script automatiza la tarea de detener, eliminar un contenedor Docker y remover la imagen asociada. Es útil para mantener limpio el entorno Docker y liberar espacio en el sistema.
+Si este proyecto te ha sido útil y deseas apoyar su desarrollo, considera invitarme un café. Cada contribución ayuda a mantener el flujo de trabajo y a mejorar herramientas como esta.  
 
-```shell
-# rm_dkr_clean_v-2.2
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
-DKR_NOM="paperless-ngx"
+---
 
-# Obtiene el ID del contenedor basado en el nombre o imagen
-DKR_LID=$(sudo docker ps | grep $DKR_NOM | awk '{print $1}')
-
-# Obtiene la imagen asociada al contenedor
-DKR_IMG=$(sudo docker ps --filter "id=$DKR_LID" --format "{{.Image}}")
-
-# Detiene, elimina el contenedor y elimina la imagen
-sudo docker stop $DKR_LID
-sudo docker rm $DKR_LID
-sudo docker rmi $DKR_IMG
-```
+> Este documento está basado en los estándares y prácticas recomendadas para implementaciones autohospedadas con Docker. Asegúrate de realizar un monitoreo regular y mantener el sistema actualizado.
