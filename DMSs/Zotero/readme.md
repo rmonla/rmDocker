@@ -1,77 +1,82 @@
-# Zotero   
-![](./logo.png)
-![](./captura.png)
+<!--  
+# Ricardo Monla (https://github.com/rmonla)
+# Zotero - v250115-1521
+-->
 
-**Zotero** es un software de código abierto diseñado para gestionar y organizar referencias bibliográficas y documentos. Es ampliamente utilizado por investigadores, estudiantes y académicos para recopilar, organizar, citar y compartir fuentes de investigación. Ofrece una solución accesible para manejar grandes cantidades de información de manera eficiente y está disponible en una versión que se puede ejecutar en contenedores Docker.
+# <img src="https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/zotero-icon.png" alt="Zotero Logo" width="100"/>
 
-## rm_dkr_config
-Este script automatiza la configuración y el despliegue de **Zotero** en contenedores Docker, simplificando la puesta en marcha y garantizando un entorno reproducible.
+**Zotero** es una herramienta gratuita y de código abierto diseñada para ayudar en la recopilación, organización, anotación, citación y compartición de investigaciones.
 
-```shell
-# rm_dkr_config_v-2.2
-
-# ![Zotero - Docker Hub](https://hub.docker.com/r/linuxserver/zotero)
-# [Acceso --> http://localhost:3000]
-
-DKR_NOM="zotero"     # ${DKR_NOM} Nombre del contenedor
-DKR_POR="3000"       # ${DKR_POR} Puerto del contenedor
-
-# Cadena con la configuración del archivo docker-compose
-DKR_CFG=$(cat <<-EOF
 ---
-services:
-  zotero:
-    image: lscr.io/linuxserver/zotero:latest
-    container_name: ${DKR_NOM}
-    security_opt:
-      - seccomp:unconfined #optional
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Argentina/La_Rioja
-    volumes:
-      - /path/to/config:/config
-    ports:
-      - ${DKR_POR}:3000
-      - 3001:3001
-    shm_size: "1gb"
-    restart: unless-stopped
+
+## Recursos y Enlaces Útiles
+
+- 📚 **Información del Software**:
+  - [Sitio Oficial](https://www.zotero.org/)
+  - [Documentación Oficial](https://www.zotero.org/support/)
+  - [Documentación Docker](https://hub.docker.com/r/linuxserver/zotero/)
+  - [Repositorio en GitHub](https://github.com/linuxserver/docker-zotero)
 ---
-EOF
-)
+
+## Principales Características
+
+- **Recopilación Automática de Referencias**: Zotero detecta automáticamente contenido académico mientras navegas por la web, permitiendo guardar artículos, libros y otros recursos con un solo clic. 
+
+- **Organización Personalizada**: Facilita la clasificación de investigaciones mediante colecciones y etiquetas, y permite realizar búsquedas avanzadas para acceder rápidamente a los materiales necesarios. 
+
+- **Generación de Citas y Bibliografías**: Crea referencias y bibliografías instantáneamente en diversos procesadores de texto, incluyendo Microsoft Word, LibreOffice y Google Docs, con soporte para más de 9,000 estilos de citación. 
+
+- **Sincronización entre Dispositivos**: Ofrece la opción de sincronizar datos a través de múltiples dispositivos, manteniendo archivos, notas y registros bibliográficos actualizados y accesibles desde cualquier navegador web. 
+
+- **Colaboración en Grupo**: Permite compartir bibliotecas con otros usuarios, facilitando la coautoría de trabajos, distribución de materiales académicos y creación de bibliografías colaborativas sin costo adicional. 
+
+- **Integración con Navegadores**: Funciona con conectores para navegadores como Chrome, Firefox, Safari y Opera, detectando automáticamente el contenido y permitiendo su almacenamiento en Zotero con un solo clic. 
+
+- **Soporte Multiplataforma**: Compatible con sistemas operativos como Mac, Windows y Linux, lo que garantiza su accesibilidad para una amplia gama de usuarios. 
+
+- **Almacenamiento y Gestión de Archivos**: Permite almacenar y gestionar referencias, etiquetas, notas y archivos adjuntos, facilitando la organización de la información recopilada. 
+
+- **Extracción Automática de Metadatos**: Ofrece la capacidad de extraer automáticamente metadatos de documentos PDF, simplificando el proceso de incorporación de nuevas referencias. 
+
+- **Búsqueda de Texto Completo**: Incluye una función de búsqueda completa de texto a través de documentos, lo que facilita la localización de información específica dentro de los archivos almacenados.
+
+---
+
+## Implementación con Docker
+
+El siguiente script automatiza el proceso de configuración y despliegue de **Zotero**, asegurando que los directorios, archivos de configuración y contenedores necesarios estén listos con un único comando. Esto facilita una implementación rápida y sin complicaciones.
+
+### Requisitos Previos
+
+- Sistema operativo **Linux** con [Curl](https://curl.se/) instalado.
+- Instalaciones previas de [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/).
+- Espacio en disco suficiente para datos persistentes.
+- Configuración de puertos para la interfaz web y servicios relacionados.
+
+### Despliegue del Contenedor
+
+Ejecuta el siguiente comando en la terminal para desplegar **Zotero** con Docker:
+
+```bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/DMSs/Zotero/rmDkrUp-Zotero.sh" | bash
 ```
 
-## rm_dkr_install
-Este script automatiza la creación del archivo `docker-compose` y la ejecución de Zotero en un contenedor Docker.
+### Ingreso al Aplicativo
 
-```shell
-# rm_dkr_install_v-3.1
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
 
-DKR_DIR="/docker/$DKR_NOM"
-DKR_YML="$DKR_DIR/docker-compose.yml"
+- **URL**: [http://localhost:8080](http://localhost:8080)
+- **Usuario**: `admin`  
+- **Contraseña**: `admin`
 
-# Crear directorio y archivo docker-compose con la configuración
-sudo mkdir -p "$DKR_DIR" && echo "$DKR_CFG" | sudo tee "$DKR_YML" > /dev/null
+---
 
-# Ejecutar docker-compose
-sudo docker-compose -f "$DKR_YML" up -d
+## Agradecimientos
 
-```
+Si este proyecto te resulta útil, considera apoyar su desarrollo:
 
-# rm_dkr_clean
-Este script automatiza la tarea de detener, eliminar un contenedor Docker y remover la imagen asociada. Es útil para mantener limpio el entorno Docker y liberar espacio en el sistema.
-```shell
-# rm_dkr_clean_v-2.2
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
-# Obtiene el ID del contenedor basado en el nombre o imagen
-DKR_LID=$(sudo docker ps | grep $DKR_NOM | awk '{print $1}')
+---
 
-# Obtiene la imagen asociada al contenedor
-DKR_IMG=$(sudo docker ps --filter "id=$DKR_LID" --format "{{.Image}}")
-
-# Detiene, elimina el contenedor y elimina la imagen
-sudo docker stop $DKR_LID
-sudo docker rm $DKR_LID
-sudo docker rmi $DKR_IMG
-
-```
+> Este documento sigue las mejores prácticas para implementaciones autohospedadas con Docker. Recuerda monitorear constantemente y mantener tu sistema actualizado para garantizar un rendimiento óptimo.
