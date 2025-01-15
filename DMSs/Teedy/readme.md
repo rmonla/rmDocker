@@ -1,109 +1,77 @@
-# Sismics Docs [Teedy] ![](./teedy_logo.png)  
-![](./teedy_488755_full.png)
+<!--  
+# Ricardo Monla (https://github.com/rmonla)
+# Teedy - v250115-1353
+-->
 
-**Teedy** es un software de código abierto para la gestión de documentos (Document Management System, DMS). Está diseñado para ayudar a las organizaciones y a los usuarios a digitalizar, organizar y gestionar de manera eficiente sus documentos y archivos electrónicos. Es ideal para pequeñas y medianas empresas, así como para usuarios que buscan una solución ligera y eficiente para la gestión documental, sin los costos asociados al software comercial.
+# <img src="https://teedy.io/img/github-title.png" alt="Teedy Logo" width="300"/>
 
-## rm_dkr_install:
-Este script automatiza la configuración y el despliegue del sistema en contenedores Docker.
+**Teedy** es un sistema de gestión de documentos (Document Management System, DMS) de código abierto. Está diseñado para digitalizar, organizar y gestionar documentos de forma eficiente. Es una solución ideal para pequeñas y medianas empresas, así como para usuarios que buscan una herramienta ligera y económica de gestión documental.
 
-```shell
-# rm_dkr_install_v-3.1
-
-# ![teedy DMS - GitHub](https://github.com/sismics/docs)
-# [Iniciar --> http://localhost:8080 admin:admin
-
-DKR_NOM="teedydocs"     # ${DKR_NOM} Nombre del contenedor
-DKR_POR="8080"          # ${DKR_POR} Puerto del contenedor
-
-DKR_DIR="/docker/$DKR_NOM"
-DKR_YML="$DKR_DIR/docker-compose.yml"
-
-# Cadena con la configuración del archivo docker-compose
-DKR_CFG=$(cat <<-EOF
 ---
-version: '3'
-services:
-# Teedy Application
-  teedy-server:
-    image: sismics/docs:v1.11
-    restart: unless-stopped
-    ports:
-      # Map internal port to host
-      - ${DK_PRT}:8080
-    environment:
-      # Base url to be used
-      DOCS_BASE_URL: "https://docs.example.com"
-      # Set the admin email
-      DOCS_ADMIN_EMAIL_INIT: "admin@example.com"
-      # Set the admin password (in this example: "superSecure")
-      DOCS_ADMIN_PASSWORD_INIT: "$$2a$$05$$PcMNUbJvsk7QHFSfEIDaIOjk1VI9/E7IPjTKx.jkjPxkx2EOKSoPS"
-      # Setup the database connection. "teedy-db" is the hostname
-      # and "teedy" is the name of the database the application
-      # will connect to.
-      DATABASE_URL: "jdbc:postgresql://teedy-db:5432/teedy"
-      DATABASE_USER: "teedy_db_user"
-      DATABASE_PASSWORD: "teedy_db_password"
-      DATABASE_POOL_SIZE: "10"
-    volumes:
-      - ./docs/data:/data
-    networks:
-      - docker-internal
-      - internet
-    depends_on:
-      - teedy-db
 
-# DB for Teedy
-  teedy-db:
-    image: postgres:13.1-alpine
-    restart: unless-stopped
-    expose:
-      - 5432
-    environment:
-      POSTGRES_USER: "teedy_db_user"
-      POSTGRES_PASSWORD: "teedy_db_password"
-      POSTGRES_DB: "teedy"
-    volumes:
-      - ./docs/db:/var/lib/postgresql/data
-    networks:
-      - docker-internal
+## Recursos y Enlaces Útiles
 
-networks:
-  # Network without internet access. The db does not need
-  # access to the host network.
-  docker-internal:
-    driver: bridge
-    internal: true
-  internet:
-    driver: bridge
+- 📚 **Información del Software**:
+  - [Sitio Oficial](https://teedy.io)
+  - [Documentación Oficial](https://teedy.io/docs)
+  - [Demo Online](https://demo.teedy.io/)
+  - [Repositorio en GitHub](https://github.com/sismics/docs)
+
+- 🎥 **Videos Recomendados**:
+  - [Introducción a Teedy](https://youtu.be/gqpJ7RE02Ao) - por [Un Loco y Su Tecnología](https://www.youtube.com/@unlocoysutecnologia)
+
 ---
-EOF
-)
 
-# Crear directorio y archivo docker-compose con la configuración
-sudo mkdir -p "$DKR_DIR" && echo "$DKR_CFG" | sudo tee "$DKR_YML" > /dev/null
+## Principales Características
 
-# Ejecutar docker-compose
-sudo docker-compose -f "$DKR_YML" up -d
+1. **Gestión Eficiente de Documentos**: Permite almacenar, organizar y recuperar documentos con facilidad.
+2. **Búsqueda Avanzada**: Incluye un sistema de etiquetado y búsqueda por palabras clave.
+3. **Control de Versiones**: Ofrece un historial completo de cambios y versiones.
+4. **Acceso Multiusuario**: Configuración avanzada de permisos para diferentes usuarios.
+5. **Interfaz Intuitiva**: Navegación sencilla para una rápida adopción.
+6. **Integración API**: Conexión con otros sistemas y flujos de trabajo.
+7. **Compatibilidad**: Admite formatos como PDF, Word, Excel e imágenes.
+8. **OCR Incorporado**: Reconocimiento óptico de texto en documentos escaneados.
+9. **Notificaciones**: Alertas automáticas para cambios y actividades.
+10. **Seguridad**: Protección avanzada y copias de seguridad automáticas.
+
+---
+
+## Implementación con Docker
+
+El siguiente script automatiza el proceso de configuración y despliegue de **Teedy**, asegurando que los directorios, archivos de configuración y contenedores necesarios estén listos con un único comando. Esto facilita una implementación rápida y sin complicaciones.
+
+### Requisitos Previos
+
+- Sistema operativo **Linux** con [Curl](https://curl.se/) instalado.
+- Instalaciones previas de [Docker](https://www.docker.com/) y [Docker Compose](https://docs.docker.com/compose/).
+- Espacio en disco suficiente para datos persistentes.
+- Configuración de puertos para la interfaz web y servicios relacionados.
+
+### Despliegue del Contenedor
+
+Ejecuta el siguiente comando en la terminal para desplegar **Teedy** con Docker:
+
+```bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/DMSs/Teedy/rmDkrUp-Teedy.sh" | bash
 ```
 
-# rm_dkr_clean
+### Ingreso al Aplicativo
 
-Este script automatiza la tarea de detener, eliminar un contenedor Docker y remover la imagen asociada. Es útil para mantener limpio el entorno Docker y liberar espacio en el sistema.
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
 
-```shell
-# rm_dkr_clean_v-2.2
+- **URL**: [http://localhost:8080](http://localhost:8080)
+- **Usuario**: `admin`  
+- **Contraseña**: `admin`
 
-DKR_NOM="teedydocs"
+---
 
-# Obtiene el ID del contenedor basado en el nombre o imagen
-DKR_LID=$(sudo docker ps | grep $DKR_NOM | awk '{print $1}')
+## Agradecimientos
 
-# Obtiene la imagen asociada al contenedor
-DKR_IMG=$(sudo docker ps --filter "id=$DKR_LID" --format "{{.Image}}")
+Si este proyecto te resulta útil, considera apoyar su desarrollo:
 
-# Detiene, elimina el contenedor y elimina la imagen
-sudo docker stop $DKR_LID
-sudo docker rm $DKR_LID
-sudo docker rmi $DKR_IMG
-```
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
+---
+
+> Este documento sigue las mejores prácticas para implementaciones autohospedadas con Docker. Recuerda monitorear constantemente y mantener tu sistema actualizado para garantizar un rendimiento óptimo.
