@@ -1,159 +1,77 @@
 <!--  
-# Ricardo MONLA (https://github.com/rmonla)
-# rmDocker|Uptime Kuma - Versión: 250102-1827
+# Ricardo Monla (https://github.com/rmonla)
+# Dockge - v250115-1949
 -->
+
 # <img src="https://github.com/louislam/uptime-kuma/raw/master/public/icon.png" alt="Dockge Logo" width="100"/>Dockge
 
-Este documento explica cómo configurar un contenedor Docker para implementar **Dockge**, una herramienta autohospedada diseñada para la monitorización de sitios y servicios en tiempo real. Con un diseño moderno, intuitivo y altamente personalizable, Dockge permite a los usuarios supervisar la disponibilidad y el rendimiento de sus recursos críticos.
+**Dockge** es una herramienta de código abierto diseñada para facilitar la gestión de aplicaciones Docker mediante archivos `docker-compose.yaml`. Su objetivo principal es proporcionar una interfaz intuitiva y reactiva para administrar pilas de contenedores de manera eficiente.
 
 ---
 
-## Enlaces de Consulta
+## Recursos y Enlaces Útiles
 
-- 📚 Información del Aplicativo:
-  - [Sitio Oficial](https://github.com/louislam/dockge)
-  - [Repositorio en GitHub](https://github.com/louislam/dockge)
-  - [Documentación Oficial](https://github.com/louislam/dockge)
-- 🎥 Videos Recomendados:
-  - [Dockge 1.0 - Release](https://youtu.be/AWAlOQeNpgU) - por **Louis**
+- 📚 **Información del Software**:
+  - [Sitio Oficial](https://dockge.kuma.pet/)
+  - [Documentación Docker](https://hub.docker.com/r/louislam/dockge/)
+  - [Repositorio en GitHub](https://github.com/louislam/dockge/)
+- 🎥 **Videos Recomendados**:
+  - [Dockge 1.0 - Release](https://youtu.be/AWAlOQeNpgU&t=48s) - por [**Louis**](https://www.youtube.com/@LouisLamLam)
+---
 
+## Principales Características
+
+- **Gestión de Pilas de Contenedores**: Permite crear, editar, iniciar, detener, reiniciar y eliminar pilas de contenedores definidas en archivos `compose.yaml`.
+
+- **Actualización de Imágenes Docker**: Facilita la actualización de imágenes Docker utilizadas en las pilas, asegurando que las aplicaciones se mantengan al día.
+
+- **Interfaz de Usuario Intuitiva**: Ofrece una interfaz web fácil de usar, diseñada para mejorar la experiencia del usuario en la gestión de contenedores.
+
+- **Integración con Docker Compose V2**: Construido sobre Docker Compose V2, aprovecha las mejoras y funcionalidades avanzadas de esta versión.
+
+- **Soporte para Directorios Personalizados**: Permite configurar directorios personalizados para almacenar los archivos `compose.yaml`, brindando flexibilidad en la organización de las pilas.
+
+- **Compatibilidad con Portainer**: Aunque Dockge se centra en la gestión de pilas mediante `compose.yaml`, es posible utilizarlo junto con Portainer para una administración más completa de los contenedores.
+
+- **Código Abierto y Comunidad Activa**: Al ser una herramienta de código abierto, cuenta con una comunidad activa que contribuye a su desarrollo y mejora continua.
 
 ---
 
-## Características Destacadas
+## Implementación con Docker
 
-- **Monitorización avanzada:** Supervisa el estado de dispositivos Docker con eficiencia.
-- **Diseño intuitivo:** Interfaz clara y moderna para gestionar múltiples servicios.
-- **Implementación sencilla:** Configuración rápida con Docker Compose.
-- **Solución autohospedada:** Mantén el control total de tus datos y configuración.
-- **Compatibilidad:** Ideal para integrarse con otras herramientas como Uptime Kuma y Portainer.
----
+El siguiente script automatiza el proceso de configuración y despliegue de **Dockge**, asegurando que los directorios, archivos de configuración y contenedores necesarios estén listos con un único comando. Esto facilita una implementación rápida y sin complicaciones.
 
-## Requisitos Previos
+### Requisitos Previos
 
-- Docker y Docker Compose instalados en el sistema.
-- Espacio suficiente en disco para datos persistentes.
-- Acceso a los puertos necesarios para la interfaz web y los servicios monitorizados.
+- Sistema operativo **Linux** con [Curl](https://curl.se/) instalado.
+- Instalaciones previas de [Docker](https://docs.docker.com/engine/install/) y [Docker Compose](https://docs.docker.com/compose/).
+- Espacio en disco suficiente para datos persistentes.
+- Configuración de puertos para la interfaz web y servicios relacionados.
 
----
+### Despliegue del Contenedor
 
-## Configuración e Implementación
-
-### 1. Crear y Editar el Script `rmDkr-Deploy-UptimeKuma.sh`
-
-Ejecuta el siguiente comando para crear el script de despliegue:
+Ejecuta el siguiente comando en la terminal para desplegar **Dockge** con Docker:
 
 ```bash
-nano rmDkr-Deploy-UptimeKuma.sh
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Dockge/rmDkrUp-Dockge.sh" | bash
 ```
 
-Copia y pega el siguiente contenido en el archivo:
+### Ingreso al Aplicativo
 
-```bash
-#!/bin/bash
-# Script para configurar y desplegar Uptime Kuma en Docker
-# Ricardo MONLA (https://github.com/rmonla)
-# rmDocker|Uptime Kuma - Versión: 250102-1827
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
 
-# Variables del Docker
-dkrVRS=$(cat <<YAML
-
-dkrNOM=dockge
-dkrPOR=5001
-
-dkrArchENV=.env
-dkrArchYML=docker-compose.yml
-
-appDirDAT=data
-YAML
-)
-
-dkrYML=$(cat <<YAML
-services:
-  dockge:
-    image: louislam/dockge:1
-    container_name: \${dkrNOM}
-    restart: unless-stopped
-    ports:
-      - \${dkrPOR}:5001
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./\${appDirDAT}:/app/data
-      - /opt/stacks:/opt/stacks
-    environment:
-      - DOCKGE_STACKS_DIR=/opt/stacks
-
-YAML
-)
-# ---
-
-# Procesar el contenido de dkrVRS y exportar las variables
-eval "$(echo "$dkrVRS" | grep -E '^[a-zA-Z_][a-zA-Z0-9_]*=' | sed 's/^/export /')"
-# ---
-
-crear_directorio() {
-    for newDir in "$@"; do
-        echo "Creando el directorio $newDir"
-        mkdir -p "$newDir" || { echo "Error al crear el directorio $newDir"; exit 1; }
-    done
-}
-
-dirDKR="$(pwd)/$dkrNOM"
-
-directorios=(
-    "$dirDKR"
-    "$dirDKR/$appDirDAT"
-)
-
-crear_directorio "${directorios[@]}"
-# ---
-
-escribir_archivo() {
-    echo "Creando el archivo $2"
-    echo "$1" > "$2" || { echo "Error al escribir $2"; exit 1; }
-}
-escribir_archivo "${dkrVRS}" "$dirDKR/$dkrArchENV" # Variables de entorno de Docker
-escribir_archivo "${dkrYML}" "$dirDKR/$dkrArchYML" # Archivo de despliegue de Docker
-# ---
-
-# Ejecutar docker-compose
-archDkrComp="$dirDKR/$dkrArchYML"
-echo "Iniciando el contenedor con docker-compose..."
-docker compose -f "$archDkrComp" up -d || { echo "Error al ejecutar docker-compose"; exit 1; }
-
-# Mensaje de finalización
-echo "${dkrNOM} se ha desplegado correctamente en http://0.0.0.0:${dkrPOR}/"
-
-```
----
-
-### 2. Ejecutar el Script de Despliegue
-
-Guarda el archivo y ejecuta el script:
-
-```bash
-sh rmDkr-Deploy-UptimeKuma.sh
-```
+- **URL**: [http://localhost:8080](http://localhost:8080)
+- **Usuario**: `admin`  
+- **Contraseña**: `admin`
 
 ---
 
-## Notas Adicionales
+## Agradecimientos
 
-- **Detener el Contenedor:**
-  Para detener y eliminar el contenedor, utiliza el comando:
+Si este proyecto te resulta útil, considera apoyar su desarrollo:
 
-  ```bash
-  docker compose down
-  ```
-
-- **Actualizar Uptime Kuma:**
-  Para actualizar a la última versión, ejecuta:
-
-  ```bash
-  docker compose pull && docker compose up -d
-  ```
-
-- **Personalización:**
-  Consulta la [documentación oficial](https://github.com/louislam/uptime-kuma/wiki/) para ajustar configuraciones avanzadas y definir alertas personalizadas.
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
 ---
+
+> Este documento sigue las mejores prácticas para implementaciones autohospedadas con Docker. Recuerda monitorear constantemente y mantener tu sistema actualizado para garantizar un rendimiento óptimo.

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Dockge en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDocker|Dockge - Versión: 250102-1930
+# Dockge - v250115-1823
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -49,7 +49,6 @@ crear_directorio() {
 dirDKR="$(pwd)/$dkrNOM"
 
 directorios=(
-    "$dirDKR"
     "$dirDKR/$appDirDAT"
 )
 
@@ -70,4 +69,4 @@ echo "Iniciando el contenedor con docker-compose..."
 docker compose -f "$archDkrComp" up -d || { echo "Error al ejecutar docker-compose"; exit 1; }
 
 # Mensaje de finalización
-echo "${dkrNOM} se ha desplegado correctamente en http://0.0.0.0:${dkrPOR}/"
+echo "${dkrNOM} se ha desplegado correctamente en http://localhost:${dkrPOR}/"
