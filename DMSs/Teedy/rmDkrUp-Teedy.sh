@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Paperless-ngx en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Teedy - v250115-1311
+# Teedy - v250115-1438
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -19,7 +19,7 @@ YAML
 dkrYML=$(cat <<YAML
 services:
   teedy-dms:
-    image: sismics/docs:v1.11
+    image: sismics/docs:latest
     container_name: \${dkrNOM}
     ports:
       - \${dkrPOR}:8080
