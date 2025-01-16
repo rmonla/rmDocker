@@ -1,12 +1,12 @@
 #!/bin/bash
 # Script para configurar y desplegar Portainer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Portainer - v250116-0349
+# Portainer|rmDkrUp-Portainer.sh - v250110-2231
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
 
-dkrNOM=Portainer
+dkrNOM=portainer
 dkrPOR=9000
 
 dkrArchENV=.env
@@ -21,15 +21,15 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     container_name: \${dkrNOM}
-    ports:
-      - \${dkrPOR}:9000
+    restart: unless-stopped
     security_opt:
       - no-new-privileges:true
     volumes:
-      - ./\${appDirDAT}:/data
       - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
+      - ./\${appDirDAT}:/data
+    ports:
+      - \${dkrPOR}:9000
 YAML
 )
 # ---
@@ -61,6 +61,7 @@ escribir_archivo() {
 }
 escribir_archivo "${dkrVRS}" "$dirDKR/$dkrArchENV" # Variables de entorno de Docker
 escribir_archivo "${dkrYML}" "$dirDKR/$dkrArchYML" # Archivo de despliegue de Docker
+# escribir_archivo "# #####" "$dirDKR/$appArchCFG" # Archivo de despliegue de Docker
 # ---
 
 # Ejecutar docker-compose
@@ -69,4 +70,4 @@ echo "Iniciando el contenedor con docker-compose..."
 docker compose -f "$archDkrComp" up -d || { echo "Error al ejecutar docker-compose"; exit 1; }
 
 # Mensaje de finalización
-echo "${dkrNOM} se ha desplegado correctamente en http://localhost:${dkrPOR}/"
+echo "${dkrNOM} se ha desplegado correctamente en http://0.0.0.0:${dkrPOR}/"
