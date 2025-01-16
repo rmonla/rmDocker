@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Homer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmUPsHomer - v250116-2006
+# rmUPsHomer - v250116-2017
 
 # Variables del Docker
 dkrENVs=$(cat <<YAML
