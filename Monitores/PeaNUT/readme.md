@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# PeaNUT - v250116-1733
+# PeaNUT - v250116-1823
 -->
 
 # <img src="https://raw.githubusercontent.com/Brandawg93/PeaNUT/main/src/app/icon.svg" alt="PeaNUT Logo" width="100"/>PeaNUT
@@ -50,10 +50,13 @@ curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/PeaN
 
 ### Ingreso al Aplicativo
 
-Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL:
 
 - **URL**: [http://localhost:[dkrPOR]](http://localhost:[dkrPOR])
+
+Luego en la pantalla se debe colocar las credenciales e informacion de la UPS conectada a la red. !VERIFICAR 
 ---
+
 
 ## Agradecimientos
 
