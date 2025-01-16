@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Dockge - v250115-1956
+# Dockge - v250116-0213
 -->
 
 # <img src="https://github.com/louislam/uptime-kuma/raw/master/public/icon.png" alt="Dockge Logo" width="100"/>Dockge
@@ -61,10 +61,7 @@ curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Dock
 
 Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
 
-- **URL**: [http://localhost:8080](http://localhost:8080)
-- **Usuario**: `admin`  
-- **Contraseña**: `admin`
-
+- **URL**: [http://localhost:5001](http://localhost:5001)
 ---
 
 ## Agradecimientos
