@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Homer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmUPsHomer - v250116-2017
+# rmUPsHomer - v250116-2031
 
 # Variables del Docker
 dkrENVs=$(cat <<YAML
@@ -162,11 +162,11 @@ dirDKR="$(pwd)/$dkrNOM"
 aDkrENVs="$dirDKR/$archDkrENVs"
 aDkrDCOM="$dirDKR/$archDkrDCOM"
 
-dirAppCFG="$dirDKR/$dirAppCFG"
-aAppCFG="$dirAppCFG/$archAppCFG"
+dAppCFG="$dirDKR/$dirAppCFG"
+aAppCFG="$dAppCFG/$archAppCFG"
 
 directorios=(
-    "$dirAppCFG"
+    "$dAppCFG"
 )
 
 crear_directorio "${directorios[@]}"
