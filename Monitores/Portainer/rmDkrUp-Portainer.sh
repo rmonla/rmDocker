@@ -1,12 +1,12 @@
 #!/bin/bash
 # Script para configurar y desplegar Portainer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Portainer - v250116-0349
+# Portainer - v250116-0359
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
 
-dkrNOM=Portainer
+dkrNOM=portainer
 dkrPOR=9000
 
 dkrArchENV=.env
