@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Glances - v250116-0254
+# Glances - v250116-0310
 -->
 
 # <img src="https://nicolargo.github.io/glances/public/images/glances.png" alt="Glances Logo" width="100"/>

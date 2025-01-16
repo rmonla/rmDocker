@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Glances en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Glances - v250116-0259
+# Glances - v250116-0310
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
