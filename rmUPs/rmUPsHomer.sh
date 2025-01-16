@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Homer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmUPsHomer - v250116-1926
+# rmUPsHomer - v250116-2006
 
 # Variables del Docker
 dkrENVs=$(cat <<YAML
@@ -159,11 +159,11 @@ crear_directorio() {
 }
 
 dirDKR="$(pwd)/$dkrNOM"
-archDkrENVs="$dirDKR/$archDkrENVs"
-archDkrDCOM="$dirDKR/$archDkrDCOM"
+aDkrENVs="$dirDKR/$archDkrENVs"
+aDkrDCOM="$dirDKR/$archDkrDCOM"
 
 dirAppCFG="$dirDKR/$dirAppCFG"
-archAppCFG="$dirAppCFG/$archAppCFG"
+aAppCFG="$dirAppCFG/$archAppCFG"
 
 directorios=(
     "$dirAppCFG"
@@ -176,14 +176,14 @@ escribir_archivo() {
     echo "Creando el archivo $2"
     echo "$1" > "$2" || { echo "Error al escribir $2"; exit 1; }
 }
-escribir_archivo "${dkrENVs}" "$archDkrENVs"  # Variables de entorno de Docker
-escribir_archivo "${dkrDCOM}" "$archDkrDCOM" # Archivo de despliegue de Docker
-escribir_archivo "${appCFG}" "$archAppCFG"  # Archivo de despliegue de Docker
+escribir_archivo "${dkrENVs}" "$aDkrENVs"  # Variables de entorno de Docker
+escribir_archivo "${dkrDCOM}" "$aDkrDCOM" # Archivo de despliegue de Docker
+escribir_archivo "${appCFG}" "$aAppCFG"  # Archivo de despliegue de Docker
 # ---
 
 # Ejecutar docker-compose
 echo "Iniciando el contenedor con docker-compose..."
-docker compose -f "$archDkrDCOM" up -d || { echo "Error al ejecutar docker-compose"; exit 1; }
+docker compose -f "$aDkrDCOM" up -d || { echo "Error al ejecutar docker-compose"; exit 1; }
 
 # Mensaje de finalización
-echo "${dkrNOM} se ha desplegado correctamente en http://0.0.0.0:${dkrPOR}/"
+echo "${dkrNOM} se ha desplegado correctamente en http://localhost:${dkrPOR}/"
