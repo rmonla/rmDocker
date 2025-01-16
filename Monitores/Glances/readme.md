@@ -1,120 +1,78 @@
-# <img src="https://nicolargo.github.io/glances/public/images/glances.png" alt="Glances Logo" width="100"/> Glances
+<!--  
+# Ricardo Monla (https://github.com/rmonla)
+# Glances - v250116-0254
+-->
 
-Este documento describe cómo configurar un contenedor Docker para implementar **Glances**, una herramienta avanzada para monitorizar sistemas, aplicaciones y redes en tiempo real. Glances proporciona una visión completa y detallada del rendimiento del sistema con una interfaz personalizable y moderna.
+# <img src="https://nicolargo.github.io/glances/public/images/glances.png" alt="Glances Logo" width="100"/>
+
+**Glances** es una herramienta avanzada para la monitorización en tiempo real de sistemas, aplicaciones y redes. Diseñada para ser eficiente y altamente configurable, Glances se adapta tanto a usuarios individuales como a administradores de sistemas.
 
 ---
 
-### Enlaces de consulta:
-- 📚 Información del Aplicativo:
-  - [Sitio Oficial de Glances](https://nicolargo.github.io/glances/)
+## Características Destacadas
+
+- **Monitorización en Tiempo Real**: Proporciona información detallada sobre el rendimiento del sistema, como el uso de CPU, memoria, discos, red, procesos y más, todo en tiempo real.
+
+- **Interfaz Personalizable**: Ofrece una interfaz moderna y adaptable que permite ajustar los parámetros visualizados según las necesidades del usuario.
+
+- **Modo Cliente/Servidor**: Glances puede ejecutarse en un servidor y permitir la monitorización remota desde cualquier dispositivo conectado.
+
+- **Integración con Herramientas Externas**: Compatible con plataformas como InfluxDB, Elasticsearch, y Grafana para análisis de datos avanzados y generación de informes visuales.
+
+- **Soporte para Contenedores**: Incluye funcionalidades específicas para monitorizar sistemas que utilicen Docker o tecnologías similares.
+
+- **Alertas Personalizadas**: Permite configurar alertas basadas en condiciones específicas del sistema, ayudando a identificar problemas potenciales antes de que se conviertan en críticos.
+
+- **Multiplataforma**: Funciona en sistemas operativos basados en Linux, macOS, Windows y BSD.
+
+- **Fácil Instalación y Uso**: Disponible como paquete Python, imagen Docker o binario precompilado, lo que facilita su implementación en diferentes entornos.
+
+---
+
+## Recursos y Enlaces Útiles
+
+- 📚 **Información del Software**:
+  - [Sitio Oficial](https://nicolargo.github.io/glances/)
   - [Documentación](https://github.com/nicolargo/glances/wiki/)
-  - [GitHub](https://github.com/nicolargo/glances)
-- 🎥 Videos recomendados:
+  - [Repositorio GitHub](https://github.com/nicolargo/glances/)
+- 🎥 **Videos Recomendados**:
   - [Monitoreo con Glances en Linux - Tu htop con esteroides](https://youtu.be/oia6WqcOipU?si=Q5zA9J_Y4egr7KdD) - por [**Manuel Cabrera Caballero**](https://www.youtube.com/@DriveMeca)
 
 ---
 
-### Características destacadas
+## Implementación con Docker
 
-- **Monitorización integral:** Supervisa métricas clave del sistema, como uso de CPU, memoria, discos, redes, y más.
-- **Interfaz web accesible:** Ofrece un servidor web integrado para acceder a los datos desde cualquier navegador.
-- **Fácil implementación:** Configuración rápida utilizando Docker y Docker Compose.
-- **Personalización avanzada:** Compatible con múltiples opciones de configuración, soporte para plugins y extensiones.
-- **Soporte multiplataforma:** Disponible para Linux, macOS, Windows y entornos en contenedores.
-- **Escalabilidad:** Diseñado para monitorear desde sistemas individuales hasta infraestructuras complejas.
+El siguiente script automatiza el proceso de configuración y despliegue de **Glances**, asegurando que los directorios, archivos de configuración y contenedores necesarios estén listos con un único comando. Esto facilita una implementación rápida y sin complicaciones.
 
----
+### Requisitos Previos
 
-## Requisitos Previos
+- Sistema operativo **Linux** con [Curl](https://curl.se/) instalado.
+- Instalaciones previas de [Docker](https://docs.docker.com/engine/install/) y [Docker Compose](https://docs.docker.com/compose/).
+- Espacio en disco suficiente para datos persistentes.
+- Configuración de puertos para la interfaz web y servicios relacionados.
 
-- Docker y Docker Compose instalados en el sistema.
-- Espacio en disco suficiente para almacenar datos persistentes.
-- Acceso al puerto definido para la interfaz web.
+### Despliegue del Contenedor
 
----
-
-### 1. **Archivo `.env`**
-
-El archivo `.env` contiene las variables de entorno necesarias para configurar el contenedor.
+Ejecuta el siguiente comando en la terminal para desplegar **Glances** con Docker:
 
 ```bash
-# Variables del Docker
-dkrNOM=glances                       # Nombre del contenedor
-dkrPOR=61208                         # Puerto del contenedor
-dkrTMZ="America/Argentina/La_Rioja"  # Zona horaria
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Glances/rmDkrUp-Glances.sh" | bash
+
 ```
 
+### Ingreso al Aplicativo
+
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
+
+- **URL**: [http://localhost:dkrPOR=61208](http://localhost:dkrPOR=61208)
 ---
 
-### 2. **Archivo `docker-compose.yml`**
+## Agradecimientos
 
-El archivo `docker-compose.yml` define el servicio Docker para desplegar Glances.
+Si este proyecto te resulta útil, considera apoyar su desarrollo:
 
-```yaml
-version: '3.8'
-services:
-  glances:
-    container_name: ${dkrNOM}
-    image: nicolargo/glances:latest
-    environment:
-      - TZ=${dkrTMZ}
-      - GLANCES_OPT=-w
-    ports:
-      - ${dkrPOR}:61208
-    restart: unless-stopped
-```
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
 
 ---
 
-### Pasos para Implementar
-
-1. Crea un directorio para el proyecto y navega hasta él:
-
-   ```bash
-   mkdir glances_monitoring && cd glances_monitoring
-   ```
-
-2. Crea los archivos `.env` y `docker-compose.yml` en el directorio.
-   
-   ```bash
-   nano .env
-   ```
-   
-   ```bash
-   nano docker-compose.yml
-   ```
-
-3. Inicia el contenedor:
-
-   ```bash
-   docker-compose up -d
-   ```
-
-4. Accede a la interfaz web de Glances en tu navegador utilizando la dirección:
-
-   ```
-   http://localhost:<dkrPOR>
-   ```
-
-   Reemplaza `<dkrPOR>` con el valor definido en el archivo `.env`.
-
----
-
-### Notas Adicionales
-
-- **Detener el Contenedor:**
-  Para detener el contenedor, utiliza el comando:
-
-  ```bash
-  docker-compose down
-  ```
-
-- **Personalización:**
-  Puedes agregar configuraciones avanzadas, como parámetros adicionales para `GLANCES_OPT` según tus necesidades específicas.
-
-- **Persistencia:**
-  Aunque esta configuración no utiliza volúmenes persistentes, puedes añadirlos si necesitas conservar datos entre reinicios.
-
-- **Monitoreo remoto:**
-  Configura Glances para permitir acceso remoto habilitando el soporte para direcciones IP específicas en la configuración.
-
+> Este documento sigue las mejores prácticas para implementaciones autohospedadas con Docker. Recuerda monitorear constantemente y mantener tu sistema actualizado para garantizar un rendimiento óptimo.
