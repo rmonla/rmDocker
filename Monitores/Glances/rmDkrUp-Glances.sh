@@ -1,13 +1,15 @@
 #!/bin/bash
 # Script para configurar y desplegar Glances en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Glances - v250116-0254
+# Glances - v250116-0259
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
 
 dkrNOM=glances
 dkrPOR=61208
+
+dkrTMZ=America/Argentina/La_Rioja
 
 dkrArchENV=.env
 dkrArchYML=docker-compose.yml
