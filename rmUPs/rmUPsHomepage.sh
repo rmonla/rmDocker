@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Homer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmUPsHomepage - v250116-2112
+# rmUPsHomepage - v250116-2116
 
 # Variables del Docker
 dkrENVs=$(cat <<YAML
@@ -30,7 +30,7 @@ services:
     ports:
       - \${dkrPOR}:3000
     volumes:
-      - ./\${appDirCFG}:/app/config # Make sure your local config directory exists
+      - ./\${dirAppCFG}:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
     restart: unless-stopped
 YAML
