@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Jellyfin en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Jellyfin - v250118-1049
+# Jellyfin - v250118-1059
 
 # Variables del Docker
 codDkrENVs=$(cat <<YAML
@@ -34,8 +34,8 @@ services:
     ports:
       - \${dkrPOR}:8096
       - 8920:8920 #optional
-      - 7359:7359/udp #optional
-      - 1900:1900/udp #optional
+      # - 7359:7359/udp #optional
+      # - 1900:1900/udp #optional
     restart: unless-stopped
 YAML
 )
