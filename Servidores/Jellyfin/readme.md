@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Jellyfin - v250118-0153
+# Jellyfin - v250118-1121
 -->
 
 # <img src="https://jellyfin.org/images/logo.svg" alt="Jellyfin Logo" width="100"/>
@@ -30,8 +30,8 @@
   - [Repositorio en GitHub](https://github.com/jellyfin/jellyfin)
 
 - 🎥 **Videos Recomendados**:
-  - [Jellyfin: The BEST Media Streaming Server!](https://www.youtube.com/watch?v=1xVq_p3EOZs) - por The Linux Experiment
-  - [Jellyfin Media Server: Full Setup Tutorial](https://www.youtube.com/watch?v=8FKlXIcwx_g) - por SpaceRex
+  - [Cómo INSTALAR JELLYFIN con DOCKER COMPOSE Guía Completa para Tu Servidor Multimedia](https://youtu.be/TJAsFXvuXMg) - por Sir Gamba
+
 
 ---
 
