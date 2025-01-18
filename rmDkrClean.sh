@@ -1,6 +1,6 @@
 #!/bin/bash
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDkrClean - v250117-2345
+# rmDkrClean - v250118-0958
 
 if [ -z "$1" ]; then
     echo "Uso: $0 <nombre_del_contenedor>"
@@ -35,7 +35,7 @@ for net in $dkrNETS; do
     fi
 done
 
-# Intenta eliminar la imagen si no está en uso
+# Elimina la imagen si no está en uso
 if sudo docker images -q "$dkrIMG" &>/dev/null; then
     sudo docker rmi "$dkrIMG" && echo "Imagen $dkrIMG eliminada."
 fi
