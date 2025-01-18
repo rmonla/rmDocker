@@ -1,7 +1,9 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# SeguirEstudiando - v250118-0040
+# SeguirTrabajando - v250118-0250
 -->
+Dockers
+    jellyfin
 
 Streaming
     https://github.com/tiangolo/nginx-rtmp-docker

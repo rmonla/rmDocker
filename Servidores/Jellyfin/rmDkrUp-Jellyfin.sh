@@ -23,18 +23,18 @@ services:
     user: uid:gid
     network_mode: 'host'
     volumes:
-      - $(pwd)/config:/config
-      - $(pwd)/cache:/cache
+      - ./config:/config
+      - ./cache:/cache
       - type: bind
-        source: $(pwd)/media
+        source: ./media
         target: /media
       - type: bind
-        source: $(pwd)/media2
+        source: ./media2
         target: /media2
         read_only: true
       # Optional - extra fonts to be used during transcoding with subtitle burn-in
       - type: bind
-        source: $(pwd)/fonts
+        source: ./fonts
         target: /usr/local/share/fonts/custom
         read_only: true
     restart: 'unless-stopped'
