@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar Jellyfin en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Jellyfin - v250118-1049
+# Jellyfin - v250118-1038
 
 # Variables del Docker
 codDkrENVs=$(cat <<YAML
@@ -20,23 +20,32 @@ YAML
 codDkrCOMP=$(cat <<YAML
 services:
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
+    image: jellyfin/jellyfin
     container_name: \${dkrNOM}
-    environment:
-      - PUID=\${dkrUID}
-      - PGID=\${dkrGID}
-      - TZ=\${dkrTMZ}
-      - JELLYFIN_PublishedServerUrl=0.0.0.0 #optional
+    user: \${dkrUID}:\${dkrGID}
+    network_mode: 'host'
     volumes:
       - ./config:/config
-      - ./tvseries:/data/tvshows
-      - ./movies:/data/movies
-    ports:
-      - \${dkrPOR}:8096
-      - 8920:8920 #optional
-      - 7359:7359/udp #optional
-      - 1900:1900/udp #optional
-    restart: unless-stopped
+      - ./cache:/cache
+      - type: bind
+        source: ./media
+        target: /media
+      - type: bind
+        source: ./media2
+        target: /media2
+        read_only: true
+      # Optional - extra fonts to be used during transcoding with subtitle burn-in
+      - type: bind
+        source: ./fonts
+        target: /usr/local/share/fonts/custom
+        read_only: true
+    restart: 'unless-stopped'
+    # Optional - alternative address used for autodiscovery
+    environment:
+      - JELLYFIN_PublishedServerUrl=http://localhost
+    # Optional - may be necessary for docker healthcheck to pass if running in host network mode
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
 YAML
 )
 
