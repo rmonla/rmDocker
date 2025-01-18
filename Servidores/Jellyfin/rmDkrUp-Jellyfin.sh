@@ -1,13 +1,15 @@
 #!/bin/bash
 # Script para configurar y desplegar Jellyfin en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Jellyfin - v250118-0153
+# Jellyfin - v250118-1036
 
 # Variables del Docker
 codDkrENVs=$(cat <<YAML
 dkrNOM=jellyfin
-dkrPOR=7080
+dkrPOR=8096
 
+dkrUID=1000
+dkrGID=1000
 dkrTMZ="America/Argentina/La_Rioja"
 
 archDkrENVs=.env
@@ -20,8 +22,10 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: \${dkrNOM}
-    user: uid:gid
+    user: \${dkrUID}:\${dkrGID}
     network_mode: 'host'
+    ports:
+      - \${dkrPOR}:8096
     volumes:
       - ./config:/config
       - ./cache:/cache
@@ -40,7 +44,7 @@ services:
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
-      - JELLYFIN_PublishedServerUrl=http://example.com
+      - JELLYFIN_PublishedServerUrl=http://localhost
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
