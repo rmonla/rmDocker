@@ -1,7 +1,6 @@
 #!/bin/bash
-# Script para configurar y desplegar Homer en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDkrUp - v250116-1943
+# rmDkrUp - v250117-2329
 
 # Verifica si se ha pasado un parámetro
 if [ -z "$1" ]; then
