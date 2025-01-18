@@ -1,12 +1,12 @@
 #!/bin/bash
 # Script para configurar y desplegar Unifi en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# Unifi - v250118-1342
+# Unifi - v250118-1355
 
 # Variables del Docker
 codDkrENVs=$(cat <<YAML
 dkrNOM=unifi
-dkrPOR=8443
+dkrPOR=8080
 
 dkrTMZ="America/Argentina/La_Rioja"
 

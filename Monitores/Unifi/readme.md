@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Unifi - v250118-1334
+# Unifi - v250118-1356
 -->
 
 # <img src="https://dl.ui.com/images/unifi/unifi-logo.svg" alt="Unifi Logo" width="100"/>
@@ -55,9 +55,9 @@ curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Unif
 
 ### Ingreso al Aplicativo
 
-Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y continua con el asistete de configuracion inicial:
 
-- **URL**: [http://localhost:[dkrPOR]](http://localhost:[dkrPOR])
+- **URL**: [http://localhost:8080](http://localhost:8080)
 
 ---
 
