@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Pi-hole - v250116-0329
+# Pi-hole - v250117-2315
 -->
 
 # <img src="https://pi-hole.github.io/graphics/Vortex/Vortex_with_Wordmark.svg" alt="Pi-hole Logo" width="100"/>
@@ -51,7 +51,7 @@ El siguiente script automatiza el proceso de configuración y despliegue de **Pi
 Ejecuta el siguiente comando en la terminal para desplegar **Pi-hole** con Docker:
 
 ```bash
-curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Pi-hole/rmDkrUp-Pi-hole.sh" | bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Servidores/Pi-hole/rmDkrUp-Pi-hole.sh" | bash
 
 ```
 
