@@ -1,62 +1,65 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Unifi - v250116-1823
+# Unifi - v250118-1334
 -->
 
-# <img src="https://raw.githubusercontent.com/Brandawg93/Unifi/main/src/app/icon.svg" alt="Unifi Logo" width="100"/>Unifi
+# <img src="https://dl.ui.com/images/unifi/unifi-logo.svg" alt="Unifi Logo" width="100"/>
 
-**Unifi** es un panel de control compacto diseñado para interactuar con [Network UPS Tools (NUT)](https://networkupstools.org/), una solución que permite monitorizar y gestionar Sistemas de Alimentación Ininterrumpida (SAI/UPS) y otros dispositivos de energía. Este dashboard proporciona una interfaz web sencilla y eficiente para supervisar el estado y rendimiento de los dispositivos gestionados por NUT.
+**Unifi** es un ecosistema de redes gestionadas de forma centralizada desarrollado por Ubiquiti, que proporciona soluciones para redes inalámbricas, switches, routers y cámaras de seguridad. Su plataforma permite la administración unificada de dispositivos, ideal para entornos empresariales y de alta demanda.
 
 ---
 
 ## Características Principales
 
-- **Interfaz Web Intuitiva**: Ofrece una visualización clara y accesible del estado de los dispositivos UPS, facilitando la monitorización en tiempo real.
-
-- **Integración Sencilla**: Diseñado para integrarse fácilmente con instalaciones existentes de NUT, permitiendo una configuración rápida y sin complicaciones.
-
-- **Ligero y Eficiente**: Su diseño minimalista asegura un bajo consumo de recursos, haciéndolo ideal para sistemas con capacidades limitadas.
-
-- **Despliegue mediante Docker**: Unifi puede ser desplegado utilizando contenedores Docker, lo que simplifica su instalación y mantenimiento.
+- **Gestión Centralizada**: Control total de múltiples dispositivos de red desde una única interfaz.
+- **Conectividad de Alto Rendimiento**: Soporte para Wi-Fi 6 y tecnologías avanzadas de optimización de red.
+- **Escalabilidad Empresarial**: Solución adaptable para hogares, oficinas y grandes corporaciones.
+- **Integración con SDN**: Gestión eficiente mediante Software Defined Networking.
+- **Soporte para VLANs y Seguridad Avanzada**: Configuración detallada de políticas de acceso y segmentación de red.
+- **Monitoreo en Tiempo Real**: Visualización de tráfico, dispositivos conectados y alertas de seguridad.
+- **Compatibilidad Multiplataforma**: Funciona en servidores locales, en la nube y en dispositivos móviles.
 
 ---
 
 ## Recursos y Enlaces Útiles
 
 - 📚 **Información del Software**:
-  - [Repositorio en GitHub](https://github.com/Brandawg93/Unifi/)
+  - [Sitio Oficial](https://ui.com/unifi/)
+  - [Documentación Oficial](https://help.ui.com/hc/en-us/categories/200320424-UniFi-Network)
+  - [Repositorio en GitHub](https://github.com/Art-of-WiFi/UniFi-API-browser)
+
+- 🎥 **Videos Recomendados**:
+  - [How to Set Up a UniFi Network](https://www.youtube.com/watch?v=Wi-DhdGz6KY) - por Crosstalk Solutions
+  - [UniFi Network Controller Complete Setup](https://www.youtube.com/watch?v=bDhI-WqK-Jk) - por Willie Howe
 
 ---
 
 ## Implementación con Docker
 
-El siguiente script automatiza el proceso de configuración y despliegue de **Unifi**, asegurando que los directorios, archivos de configuración y contenedores necesarios estén listos con un único comando. Esto facilita una implementación rápida y sin complicaciones.
+El siguiente script automatiza la configuración y despliegue de **Unifi Controller**, permitiendo una administración eficiente de dispositivos de red.
 
 ### Requisitos Previos
 
 - Sistema operativo **Linux** con [Curl](https://curl.se/) instalado.
 - Instalaciones previas de [Docker](https://docs.docker.com/engine/install/) y [Docker Compose](https://docs.docker.com/compose/).
-- Espacio en disco suficiente para datos persistentes.
-- Configuración de puertos para la interfaz web y servicios relacionados.
+- Espacio en disco suficiente para almacenamiento de configuraciones y logs.
+- Configuración de puertos adecuada para acceso remoto.
 
 ### Despliegue del Contenedor
 
-Ejecuta el siguiente comando en la terminal para desplegar **Unifi** con Docker:
+Ejecuta el siguiente comando en la terminal para desplegar **Unifi Controller** con Docker:
 
 ```bash
 curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Unifi/rmDkrUp-Unifi.sh" | bash
-
 ```
 
 ### Ingreso al Aplicativo
 
-Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL:
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL y credenciales por defecto:
 
 - **URL**: [http://localhost:[dkrPOR]](http://localhost:[dkrPOR])
 
-Luego en la pantalla se debe colocar las credenciales e informacion de la UPS conectada a la red. !VERIFICAR 
 ---
-
 
 ## Agradecimientos
 
@@ -67,3 +70,4 @@ Si este proyecto te resulta útil, considera apoyar su desarrollo:
 ---
 
 > Este documento sigue las mejores prácticas para implementaciones autohospedadas con Docker. Recuerda monitorear constantemente y mantener tu sistema actualizado para garantizar un rendimiento óptimo.
+
