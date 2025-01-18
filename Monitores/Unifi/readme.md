@@ -1,78 +1,69 @@
-# UniFi
-![](./logo.png)
-![](./captura.png)
+<!--  
+# Ricardo Monla (https://github.com/rmonla)
+# Unifi - v250116-1823
+-->
 
-Un **UniFi Controller** es un software de gestión centralizada desarrollado por Ubiquiti Networks para administrar dispositivos de la serie UniFi, como puntos de acceso Wi-Fi, switches, routers y cámaras IP. Este servidor actúa como el "cerebro" del ecosistema UniFi, permitiendo a los administradores configurar, monitorizar y gestionar todos los dispositivos conectados desde una única interfaz centralizada.
+# <img src="https://raw.githubusercontent.com/Brandawg93/Unifi/main/src/app/icon.svg" alt="Unifi Logo" width="100"/>Unifi
 
-## rm_dkr_config
-Este script automatiza la configuración y el despliegue del contenedor Docker, simplificando la puesta en marcha y garantizando un entorno reproducible.
+**Unifi** es un panel de control compacto diseñado para interactuar con [Network UPS Tools (NUT)](https://networkupstools.org/), una solución que permite monitorizar y gestionar Sistemas de Alimentación Ininterrumpida (SAI/UPS) y otros dispositivos de energía. Este dashboard proporciona una interfaz web sencilla y eficiente para supervisar el estado y rendimiento de los dispositivos gestionados por NUT.
 
-  ![Zotero - Docker Hub](https://hub.docker.com/r/linuxserver/zotero)
-  [Acceso --> http://localhost:3000]
-
-```shell
-# rm_dkr_config_v-3.1
-
-DKR_NOM="unifi"
-DKR_POR=8080
-DKR_TMZ="America/Argentina/La_Rioja"
-# ${DKR_NOM} ${DKR_POR} ${DKR_TMZ}
-
-DKR_CFG=$(cat <<-EOF
 ---
-version: '3'
-services:
-  unifi:
-    image: ghcr.io/goofball222/unifi
-    container_name: ${DKR_NOM}
-    restart: unless-stopped
-    network_mode: bridge
-    ports:
-      - 3478:3478/udp
-      - ${DKR_POR}:8080
-      - 8443:8443
-      - 8880:8880
-      - 8843:8843
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./cert:/usr/lib/unifi/cert
-      - ./data:/usr/lib/unifi/data
-      - ./logs:/usr/lib/unifi/logs
-    environment:
-      - TZ=${DKR_TMZ}
-EOF
-)
-```
 
-## rm_dkr_install
-Este script automatiza la creación del archivo `docker-compose` y la ejecución del contenedor Docker.
+## Características Principales
 
-```shell
-# rm_dkr_install_v-3.1
+- **Interfaz Web Intuitiva**: Ofrece una visualización clara y accesible del estado de los dispositivos UPS, facilitando la monitorización en tiempo real.
 
-DKR_NOM="unifi"
-DKR_DIR="/docker/$DKR_NOM"
-DKR_YML="$DKR_DIR/docker-compose.yml"
+- **Integración Sencilla**: Diseñado para integrarse fácilmente con instalaciones existentes de NUT, permitiendo una configuración rápida y sin complicaciones.
 
-sudo mkdir -p "$DKR_DIR" && echo "$DKR_CFG" | sudo tee "$DKR_YML" > /dev/null
+- **Ligero y Eficiente**: Su diseño minimalista asegura un bajo consumo de recursos, haciéndolo ideal para sistemas con capacidades limitadas.
 
-sudo docker-compose -f "$DKR_YML" up -d
+- **Despliegue mediante Docker**: Unifi puede ser desplegado utilizando contenedores Docker, lo que simplifica su instalación y mantenimiento.
 
-```
+---
 
-# rm_dkr_clean
-Este script automatiza la tarea de detener, eliminar un contenedor Docker y remover la imagen asociada. Es útil para mantener limpio el entorno Docker y liberar espacio en el sistema.
-```shell
-# rm_dkr_clean_v-3.1
+## Recursos y Enlaces Útiles
 
-# Verificar $DKR_NOM está Cargado.
-DKR_NOM="unifi"
-DKR_LID=$(sudo docker ps | grep $DKR_NOM | awk '{print $1}')
+- 📚 **Información del Software**:
+  - [Repositorio en GitHub](https://github.com/Brandawg93/Unifi/)
 
-DKR_IMG=$(sudo docker ps --filter "id=$DKR_LID" --format "{{.Image}}")
+---
 
-sudo docker stop $DKR_LID
-sudo docker rm $DKR_LID
-sudo docker rmi $DKR_IMG
+## Implementación con Docker
+
+El siguiente script automatiza el proceso de configuración y despliegue de **Unifi**, asegurando que los directorios, archivos de configuración y contenedores necesarios estén listos con un único comando. Esto facilita una implementación rápida y sin complicaciones.
+
+### Requisitos Previos
+
+- Sistema operativo **Linux** con [Curl](https://curl.se/) instalado.
+- Instalaciones previas de [Docker](https://docs.docker.com/engine/install/) y [Docker Compose](https://docs.docker.com/compose/).
+- Espacio en disco suficiente para datos persistentes.
+- Configuración de puertos para la interfaz web y servicios relacionados.
+
+### Despliegue del Contenedor
+
+Ejecuta el siguiente comando en la terminal para desplegar **Unifi** con Docker:
+
+```bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Monitores/Unifi/rmDkrUp-Unifi.sh" | bash
 
 ```
+
+### Ingreso al Aplicativo
+
+Una vez desplegado el contenedor, accede al aplicativo utilizando la siguiente URL:
+
+- **URL**: [http://localhost:[dkrPOR]](http://localhost:[dkrPOR])
+
+Luego en la pantalla se debe colocar las credenciales e informacion de la UPS conectada a la red. !VERIFICAR 
+---
+
+
+## Agradecimientos
+
+Si este proyecto te resulta útil, considera apoyar su desarrollo:
+
+[![Invítame un café](https://img.shields.io/badge/Invítame%20un%20café-%23FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://bit.ly/4hcukTf)
+
+---
+
+> Este documento sigue las mejores prácticas para implementaciones autohospedadas con Docker. Recuerda monitorear constantemente y mantener tu sistema actualizado para garantizar un rendimiento óptimo.
