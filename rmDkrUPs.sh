@@ -1,16 +1,16 @@
 #!/bin/bash
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDkrUPs - v250119-1226
+# rmDkrUPs - v250119-1240
 
 # Prompt:
-# Genera un script en Bash para Linux llamado `rmDkr.sh` con las siguientes características:
+# Genera un script en Bash para Linux llamado `rmDkrUPs.sh` con las siguientes características:
 #
 # 1. Parámetros de entrada:
 #    - `-r <URL>`: Recibe una URL, la almacena en la variable `urlDkrRAW` y ejecuta `curl -sSL "$urlDkrRAW" | bash`.
 #      - Si se especifica la opción `-o <directorio>`, el comando se ejecutará dentro de ese directorio.
 #      - Si no se proporciona `-o`, el directorio por defecto será `./rmDkrUPs`.
-#    - `-u <directorio>`: Recibe un nombre de directorio, lo almacena en la variable `dirDkrUP`, cambia a ese directorio y ejecuta `docker compose up -d`.
-#    - `-x <directorio>`: Recibe un directorio dentro del cual se ejecuta `docker compose down -v --rmi local --remove-orphans`, y luego se elimina el directorio.
+#    - `-u <directorio>`: Recibe un directorio, lo almacena en la variable `dirDkrUP`, cambia a ese directorio y ejecuta `docker compose up -d`.
+#    - `-x <directorio>`: Recibe un directorio, lo almacena en la variable `dirDkrDOWN`, dentro del cual se ejecuta `docker compose down -v --rmi local --remove-orphans`, y luego se elimina el directorio.
 #
 # 2. Restricciones:
 #    - Solo puede usarse una de las opciones `-r`, `-u` o `-x`, no múltiples opciones juntas.
