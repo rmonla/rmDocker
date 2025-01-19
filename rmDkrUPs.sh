@@ -1,6 +1,6 @@
 #!/bin/bash
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDkr.sh - v250119-1205
+# rmDkrUPs - v250119-1226
 
 # Prompt:
 # Genera un script en Bash para Linux llamado `rmDkr.sh` con las siguientes características:
@@ -8,13 +8,13 @@
 # 1. Parámetros de entrada:
 #    - `-r <URL>`: Recibe una URL, la almacena en la variable `urlDkrRAW` y ejecuta `curl -sSL "$urlDkrRAW" | bash`.
 #      - Si se especifica la opción `-o <directorio>`, el comando se ejecutará dentro de ese directorio.
-#      - Si no se proporciona `-o`, el directorio por defecto será `./rmUPs`.
+#      - Si no se proporciona `-o`, el directorio por defecto será `./rmDkrUPs`.
 #    - `-u <directorio>`: Recibe un nombre de directorio, lo almacena en la variable `dirDkrUP`, cambia a ese directorio y ejecuta `docker compose up -d`.
-#    - `-x <directorio>`: Recibe un directorio dentro del cual se ejecuta `docker compose down -v --rmi local --remove-orphans`.
+#    - `-x <directorio>`: Recibe un directorio dentro del cual se ejecuta `docker compose down -v --rmi local --remove-orphans`, y luego se elimina el directorio.
 #
 # 2. Restricciones:
 #    - Solo puede usarse una de las opciones `-r`, `-u` o `-x`, no múltiples opciones juntas.
-#    - Si se usa `-r`, se valida la existencia del directorio especificado en `-o` (o `./rmUPs` si no se define `-o`) y se entra en él antes de ejecutar el comando.
+#    - Si se usa `-r`, se valida la existencia del directorio especificado en `-o` (o `./rmDkrUPs` si no se define `-o`) y se entra en él antes de ejecutar el comando.
 #    - Se deben manejar correctamente los errores y validar los parámetros.
 #
 # Genera el script listo para ejecutarse.
@@ -30,7 +30,7 @@ if [[ $# -eq 0 ]]; then
     mostrar_uso
 fi
 
-while getopts ":r:o:d:x:" opt; do
+while getopts ":r:o:u:x:" opt; do
     case ${opt} in
         r)
             if [[ -n "$dirDkrUP" || -n "$dirDkrDOWN" ]]; then
@@ -55,7 +55,7 @@ while getopts ":r:o:d:x:" opt; do
             ;;
         x)
             if [[ -n "$urlDkrRAW" || -n "$dirDkrUP" ]]; then
-                echo "Error: No se puede usar -x con -r o -d."
+                echo "Error: No se puede usar -x con -r o -u."
                 mostrar_uso
             fi
             dirDkrDOWN="$OPTARG"
@@ -67,7 +67,7 @@ while getopts ":r:o:d:x:" opt; do
 done
 
 if [[ -n "$urlDkrRAW" ]]; then
-    dirDkrDST="${dirDkrDST:-./rmUPs}"
+    dirDkrDST="${dirDkrDST:-./rmDkrUPs}"
     mkdir -p "$dirDkrDST"
     cd "$dirDkrDST"
     echo "Ejecutando script desde URL en $dirDkrDST"
@@ -85,9 +85,8 @@ elif [[ -n "$dirDkrDOWN" ]]; then
         echo "Error: El directorio '$dirDkrDOWN' no existe."
         exit 1
     fi
-    cd "$dirDkrDOWN"
     echo "Ejecutando 'docker compose down -v --rmi local --remove-orphans' en $dirDkrDOWN"
-    docker compose down -v --rmi local --remove-orphans
+    (cd "$dirDkrDOWN" && docker compose down -v --rmi local --remove-orphans)
     rm -rf "$dirDkrDOWN" && echo "Directorio $dirDkrDOWN eliminado."
 else
     mostrar_uso
