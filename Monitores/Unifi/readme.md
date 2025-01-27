@@ -1,9 +1,9 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# Unifi - v250118-1356
+# Unifi - v250127-0023
 -->
 
-# <img src="https://dl.ui.com/images/unifi/unifi-logo.svg" alt="Unifi Logo" width="100"/>
+# <img src="./logo.png" alt="Unifi Logo" width="100"/>
 
 **Unifi** es un ecosistema de redes gestionadas de forma centralizada desarrollado por Ubiquiti, que proporciona soluciones para redes inalámbricas, switches, routers y cámaras de seguridad. Su plataforma permite la administración unificada de dispositivos, ideal para entornos empresariales y de alta demanda.
 
