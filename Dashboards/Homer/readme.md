@@ -1,6 +1,6 @@
 <!--  
 # Ricardo MONLA (https://github.com/rmonla)
-# Homer - v250114-1933
+# Homer - v250130-0028
 -->
 # <img src="https://raw.githubusercontent.com/bastienwirtz/homer/main/public/logo.png" alt="Homer Logo" width="100"/> Homer
 
@@ -28,12 +28,12 @@ Este documento explica cómo configurar un contenedor Docker para implementar **
 
 ---
 
-## Requisitos Previos
+### Requisitos Previos
 
-- Sistema operativo Linux y se requiere que `curl` esté instalado.
-- Docker y Docker Compose instalados en el sistema.
-- Espacio en disco adecuado para datos persistentes.
-- Acceso a los puertos necesarios para la interfaz web y servicios relacionados.
+- Sistema operativo **Linux** con [Curl](https://curl.se/) instalado.
+- Instalaciones previas de [Docker](https://docs.docker.com/engine/install/) y [Docker Compose](https://docs.docker.com/compose/).
+- Espacio en disco suficiente para datos persistentes.
+- Configuración de puertos para la interfaz web y servicios relacionados.
 
 ---
 
