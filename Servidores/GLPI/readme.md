@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# GLPI - v250220-2001
+# GLPI - v250220-2005
 -->
 
 # <img src="https://glpi-project.org/wp-content/uploads/2021/06/logo-glpi-bleu-1.png" alt="GLPI Logo" width="100"/>
@@ -62,8 +62,7 @@ curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Servidores/GLP
   - **Servidor de la base de datos:** `mariadb`
   - **Usuario:** `glpi_user` o la que definiste en `MARIADB_USER`
   - **Contraseña:** `pass_glpi` o la que definiste en `MARIADB_GLPI_PASSWORD`
-Luego 
-  - **Nombre de la base de datos:** `glpi_db` o la que definiste en `MARIADB_DATABASE`
+   - **Nombre de la base de datos:** `glpi_db` o la que definiste en `MARIADB_DATABASE`
 
 - **Credenciales predeterminadas de GLPI:**
   - Usuario: `glpi`
