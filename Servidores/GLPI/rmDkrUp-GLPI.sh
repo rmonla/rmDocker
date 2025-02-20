@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar GLPI en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDkrUp-GLPI.sh  - v250220-1905
+# rmDkrUp-GLPI.sh  - v250220-2005
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -16,6 +16,9 @@ appDirCFG=config
 
 MARIADB_ROOT_PASSWORD=pass_root
 MARIADB_GLPI_PASSWORD=pass_glpi
+MARIADB_DATABASE=glpi_db
+MARIADB_USER=glpi_user
+
 YAML
 )
 
