@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# GLPI - v250220-1836
+# GLPI - v250220-1905
 -->
 
 # <img src="https://glpi-project.org/wp-content/uploads/2021/06/logo-glpi-bleu-1.png" alt="GLPI Logo" width="100"/>
@@ -51,7 +51,7 @@ El siguiente script automatiza la instalación y despliegue de **GLPI**, garanti
 Ejecuta el siguiente comando en la terminal para desplegar **GLPI** con Docker:
 
 ```bash
-curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Servidores/GLPI/rmDkrUp-GLPI.sh" | bash
+curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Servidores/GLPI/rmDkrUp-GLPI.sh" | sudo bash
 ```
 
 ### Ingreso al Aplicativo
