@@ -1,6 +1,6 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# GLPI - v250220-1905
+# GLPI - v250220-1914
 -->
 
 # <img src="https://glpi-project.org/wp-content/uploads/2021/06/logo-glpi-bleu-1.png" alt="GLPI Logo" width="100"/>
@@ -54,11 +54,23 @@ Ejecuta el siguiente comando en la terminal para desplegar **GLPI** con Docker:
 curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Servidores/GLPI/rmDkrUp-GLPI.sh" | sudo bash
 ```
 
-### Ingreso al Aplicativo
+### Acceder a GLPI:
+   Una vez que los contenedores estén en funcionamiento, puedes acceder a GLPI desde tu navegador web ingresando `http://localhost:PORT` si estás trabajando en tu máquina local. Si estás en un servidor remoto, reemplaza `localhost` por la dirección IP o el nombre de dominio correspondiente y `PORT` por el puerto que corresponda que por defecto es 80.
 
-Una vez desplegado el contenedor, accede a la plataforma mediante la siguiente URL y credenciales por defecto:
+**Notas adicionales:**
 
-- **URL**: [http://localhost:[dkrPOR]](http://localhost:[dkrPOR])
+- **Credenciales predeterminadas de GLPI:**
+  - Usuario: `glpi`
+  - Contraseña: `glpi`
+
+  Se recomienda cambiar estas credenciales después del primer inicio de sesión por motivos de seguridad.
+
+- **Configuración de la base de datos:**
+  Durante la instalación web de GLPI, cuando se te solicite la información de la base de datos, utiliza los siguientes parámetros:
+  - **Servidor de la base de datos:** `mariadb`
+  - **Nombre de la base de datos:** `glpi`
+  - **Usuario:** `glpi_user`
+  - **Contraseña:** la que definiste en `MARIADB_PASSWORD`
 
 ---
 
