@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script para configurar y desplegar GLPI en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDkrUp-GLPI.sh  - v250220-1903
+# rmDkrUp-GLPI.sh  - v250220-1905
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
@@ -25,10 +25,10 @@ services:
     image: mariadb:10.7
     container_name: glpi_mariadb
     environment:
-      - MARIADB_ROOT_PASSWORD=tu_contraseña_root
+      - MARIADB_ROOT_PASSWORD=\${MARIADB_ROOT_PASSWORD}
       - MARIADB_DATABASE=glpi
       - MARIADB_USER=glpi_user
-      - MARIADB_PASSWORD=tu_contraseña_glpi
+      - MARIADB_PASSWORD=\${MARIADB_GLPI_PASSWORD}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
