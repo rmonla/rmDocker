@@ -1,34 +1,60 @@
 #!/bin/bash
 # Script para configurar y desplegar GLPI en Docker
 # Ricardo MONLA (https://github.com/rmonla)
-# rmDkrUp-GLPI.sh  - v250220-1841
+# rmDkrUp-GLPI.sh  - v250220-1900
 
 # Variables del Docker
 dkrVRS=$(cat <<YAML
 
-dkrNOM=homer
-dkrPOR=8080
+dkrNOM=glpi
+dkrPOR=7080
 
 dkrArchENV=.env
 dkrArchYML=docker-compose.yml
 
 appDirCFG=config
+
+MARIADB_ROOT_PASSWORD=tu_contraseña_root
+MARIADB_GLPI_PASSWORD=tu_contraseña_glpi
 YAML
 )
 
 dkrYML=$(cat <<YAML
 services:
-  homer:
-    image: b4bz/homer
-    container_name: \${dkrNOM}
-    volumes:
-      - ./\${appDirCFG}:/www/assets # Make sure your local config directory exists
-    ports:
-      - \${dkrPOR}:8080
-    user: 1000:1000 # default
+  mariadb:
+    image: mariadb:10.7
+    container_name: glpi_mariadb
     environment:
-      - INIT_ASSETS=1 # default, requires the config directory to be writable for the container user (see user option)
-    restart: unless-stopped
+      - MARIADB_ROOT_PASSWORD=tu_contraseña_root
+      - MARIADB_DATABASE=glpi
+      - MARIADB_USER=glpi_user
+      - MARIADB_PASSWORD=tu_contraseña_glpi
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - glpi_network
+
+  glpi:
+    image: diouxx/glpi
+    container_name: \${dkrNOM}
+    ports:
+      - "\${dkrPOR}:80"
+    environment:
+      - TIMEZONE=America/Argentina/La_Rioja
+    volumes:
+      - glpi_data:/var/www/html/glpi
+    networks:
+      - glpi_network
+    depends_on:
+      - mariadb
+
+networks:
+  glpi_network:
+
+volumes:
+  mariadb_data:
+  glpi_data:
+
 YAML
 )
 # ---
