@@ -1,9 +1,10 @@
 <!--  
 # Ricardo Monla (https://github.com/rmonla)
-# GLPI - v250220-2005
+# GLPI | readme.md | v250303-2218
 -->
+[![GLPI | readme.md | v250303-2218](https://img.shields.io/badge/GLPI%20%7C%20readme.md%20-v250303%202218-blue?logo=github&logoColor=white)](https://github.com/rmonla) [![Autor: Lic. Ricardo MONLA](https://img.shields.io/badge/Autor-Lic.%20Ricardo%20MONLA-orange?logo=mail.ru&logoColor=white)](mailto:rmonla@frlr.utn.edu.ar)
 
-# <img src="https://glpi-project.org/wp-content/uploads/2021/06/logo-glpi-bleu-1.png" alt="GLPI Logo" width="100"/>
+<img src="https://glpi-project.org/wp-content/uploads/2021/06/logo-glpi-bleu-1.png" alt="GLPI Logo" width="100"/>
 
 **GLPI** (*Gestionnaire Libre de Parc Informatique*) es un software de gestión de activos de TI y mesa de ayuda que permite administrar inventarios, incidencias, proyectos y documentos en entornos empresariales y educativos. Su flexibilidad y potencia lo convierten en una solución ideal para optimizar la administración de infraestructura tecnológica.
 
@@ -82,4 +83,5 @@ Si este proyecto te resulta útil, considera apoyar su desarrollo:
 ---
 
 > Este documento sigue las mejores prácticas para implementaciones autohospedadas con Docker. Recuerda monitorear constantemente y mantener tu sistema actualizado para garantizar un rendimiento óptimo.
+
 
