@@ -1,6 +1,6 @@
 <!--  
 # Ricardo MONLA (https://github.com/rmonla)
-# Homarr - v250113-0202
+# Homarr - v250712-1623
 -->
 # <img src="https://homarr.dev/img/logo.png" alt="Homarr Logo" width="100"/> Homarr
 
@@ -46,7 +46,7 @@ Este documento explica cómo configurar un contenedor Docker para implementar **
 Ejecuta el siguiente comando en tu terminal para descargar y ejecutar el script:
 
 ```bash
-curl -sSL "https://github.com/rmonla/rmDocker/raw/refs/heads/main/Dashboards/Homarr/rmDkrUp-Homarr.sh" | bash
+curl -sS https://raw.githubusercontent.com/rmonla/rmDocker/main/rmDkrUPs/rmDKrUPs.rb | sudo ruby - Dashboards/Homarr rm-homarr
 ```
 ---
 
