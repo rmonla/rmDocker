@@ -54,8 +54,8 @@ def run_docker_compose
   fail_with_error("Comando 'docker-compose' no encontrado. ¿Está instalado?") unless system('command -v docker-compose >/dev/null')
 
   puts "🚀 Ejecutando 'docker-compose up -d'..."
-  unless system('docker-compose up -d')
-    fail_with_error("Falló la ejecución de docker-compose. Asegúrate de que Docker está en ejecución.")
+  unless system('docker compose up -d')
+    fail_with_error("Falló la ejecución de docker compose. Asegúrate de que Docker está en ejecución.")
   end
   puts "🎉 ¡Despliegue completado con éxito!"
 end
